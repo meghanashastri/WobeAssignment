@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "876995630543",
+    "project_id": "firebase-wobe"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876995630543:android:303da018c3680b28",
+        "android_client_info": {
+          "package_name": "com.example.admin.wobeassignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876995630543-0jk74i18iot0hrm5ld5tst8epcag35pm.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "876995630543-ffvd0j0jn1tr25qbo36pq1k0p3a4sq9q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.admin.wobeassignment",
+            "certificate_hash": "75e8b376336cffb7f6f518e9c92f7ff7dfd900be"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrIJ4OvgRsrW-U_IhtqhpnJc3P_DRboIU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
