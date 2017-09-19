@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,6 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
     private static final int RC_SIGN_IN = 9001;
     private static String TAG = GoogleSignInFragment.class.toString();
     private Context context;
-    ViewPager viewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,8 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         if (CommonUtils.isConnectingToInternet(getActivity())) {
             googleSignIn();
         } else {
-            Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
+                    Toast.LENGTH_SHORT).show();
         }
         return rootView;
     }
@@ -91,7 +90,6 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
     private void initialiseViews(View view) {
         SignInButton signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
-        viewPager = (ViewPager) view.findViewById(R.id.pager);
     }
 
 
@@ -103,7 +101,8 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
                 if (CommonUtils.isConnectingToInternet(getActivity())) {
                     signIn();
                 } else {
-                    Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
+                            Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -139,7 +138,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             goToNextActivity(DashboardActivity.class);
         } else {
             // Signed out, show unauthenticated UI.
-            Toast.makeText(getActivity(), "Authentication Failed",
+            Toast.makeText(getActivity(), getResources().getString(R.string.authentication_failed),
                     Toast.LENGTH_SHORT).show();
         }
     }
