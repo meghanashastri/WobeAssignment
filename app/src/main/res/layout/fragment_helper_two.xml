@@ -15,20 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivIcon"
-        android:layout_marginTop="@dimen/fifty_50dp"
+        android:layout_marginTop="@dimen/eighty_80dp"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/thirty_30dp"
+            android:layout_height="@dimen/thirty_30dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/fifteen_15dp"
             android:src="@drawable/helper_screen_two_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/ten_10dp"
+            android:layout_marginTop="@dimen/ten_10dp"
+            android:gravity="center"
             android:text="@string/count_on_us"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_size_18sp" />
@@ -37,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/twenty_20dp"
+            android:gravity="center"
             android:text="@string/questions_or_problems"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16sp" />

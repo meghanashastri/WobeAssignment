@@ -16,20 +16,17 @@ import com.example.admin.wobeassignment.R;
 
 public class RegisterFragment extends Fragment {
 
-    ViewPager viewPager;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_helper_one,
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_register,
                 container, false);
         initialiseViews(rootView);
         return rootView;
     }
 
-    private void initialiseViews(View view){
-        viewPager = (ViewPager) view.findViewById(R.id.pager);
+    private void initialiseViews(View view) {
     }
 
 }

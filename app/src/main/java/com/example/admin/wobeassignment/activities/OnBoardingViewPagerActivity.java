@@ -1,10 +1,8 @@
 package com.example.admin.wobeassignment.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +18,6 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
 
     private ViewPager viewPager;
     private OnBoardingViewPagerActivityAdapter pagerAdapter;
-
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
-    private static String TAG = "OnBoarding Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +48,17 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
         int id = view.getId();
         switch (id) {
             case R.id.btnLogin:
+                goToNextActivity(LoginActivity.class);
                 break;
             case R.id.btnRegister:
+                goToNextActivity(RegisterActivity.class);
                 break;
         }
     }
 
-   /* public void replaceFragment(Fragment fragment, String TAG) {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_holder, fragment, TAG);
-        fragmentTransaction.commit();
+    protected void goToNextActivity(Class nextActivity) {
+        Intent intent = new Intent();
+        intent.setClass(this, nextActivity);
+        startActivity(intent);
     }
-
-    public void addFragment() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        SignInFragment signInFragment = new SignInFragment();
-        fragmentTransaction.add(R.id.fragment_holder, signInFragment, TAG);
-        fragmentTransaction.commit();
-    }*/
 }
