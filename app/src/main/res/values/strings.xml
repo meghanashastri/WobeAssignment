@@ -13,4 +13,6 @@
     <string name="talk_to_us">You can talk to us.</string>
     <string name="anytime_anywhere">Anytime\nAnywhere</string>
     <string name="sell">Sell from anywhere, any time. 24/7</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
 </resources>
