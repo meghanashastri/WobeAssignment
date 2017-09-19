@@ -26,8 +26,7 @@
             android:layout_width="@dimen/hundred_fifty_150dp"
             android:layout_height="@dimen/one_1dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/ten_10dp"
-            android:layout_marginTop="@dimen/twenty_20dp"
+            android:layout_marginBottom="@dimen/twenty_20dp"
             android:background="@color/colorAccent" />
 
         <LinearLayout

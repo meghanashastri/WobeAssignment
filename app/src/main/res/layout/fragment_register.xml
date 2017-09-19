@@ -8,6 +8,7 @@
         android:layout_width="@dimen/seventy_70dp"
         android:layout_height="@dimen/seventy_70dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fifty_50dp"
         android:layout_marginTop="@dimen/fifty_50dp"
         android:src="@drawable/app_icon_transperant" />
 
@@ -16,13 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivIconRegister"
-        android:layout_margin="@dimen/fifty_50dp"
+        android:layout_marginEnd="@dimen/fifty_50dp"
+        android:layout_marginLeft="@dimen/fifty_50dp"
+        android:layout_marginRight="@dimen/fifty_50dp"
+        android:layout_marginStart="@dimen/fifty_50dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ten_10dp"
+            android:layout_marginBottom="@dimen/fifteen_15dp"
             android:text="@string/register"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_size_20sp" />
@@ -78,18 +82,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/twenty_20dp"
+            android:layout_marginTop="@dimen/twenty_20dp"
             android:background="@drawable/button"
+            android:paddingEnd="@dimen/fifty_50dp"
+            android:paddingLeft="@dimen/fifty_50dp"
+            android:paddingRight="@dimen/fifty_50dp"
+            android:paddingStart="@dimen/fifty_50dp"
             android:text="@string/register"
             android:textColor="@color/colorAccent" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="@dimen/hundred_fifty_150dp"
-        android:layout_height="@dimen/one_1dp"
-        android:layout_below="@id/registerLayout"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent" />
 
 </RelativeLayout>
