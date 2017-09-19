@@ -6,6 +6,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="zero_0dp">0dp</dimen>
     <dimen name="five_5dp">5dp</dimen>
     <dimen name="ten_10dp">10dp</dimen>
     <dimen name="margin_13dp">13dp</dimen>
@@ -13,4 +14,5 @@
     <dimen name="fifty_50dp">50dp</dimen>
     <dimen name="margin_65dp">65dp</dimen>
     <dimen name="seventy_70dp">70dp</dimen>
+    <dimen name="hundred_fifty_150dp">150dp</dimen>
 </resources>
