@@ -14,7 +14,7 @@ import com.example.admin.wobeassignment.R;
  * Created by Admin on 19-09-2017.
  */
 
-public class RegisterFragment extends Fragment {
+public class HelperOneFragment extends Fragment {
 
     ViewPager viewPager;
 

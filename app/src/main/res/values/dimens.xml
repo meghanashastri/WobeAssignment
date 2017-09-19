@@ -15,4 +15,7 @@
     <dimen name="margin_65dp">65dp</dimen>
     <dimen name="seventy_70dp">70dp</dimen>
     <dimen name="hundred_fifty_150dp">150dp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
 </resources>

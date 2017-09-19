@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
-import com.example.admin.wobeassignment.fragments.RegisterFragment;
-import com.example.admin.wobeassignment.fragments.SignInFragment;
+import com.example.admin.wobeassignment.fragments.HelperOneFragment;
+import com.example.admin.wobeassignment.fragments.HelperTwoFragment;
+import com.example.admin.wobeassignment.fragments.HelperThreeFragment;
 
 /**
  * Created by Admin on 19-09-2017.
@@ -14,9 +14,9 @@ import com.example.admin.wobeassignment.fragments.SignInFragment;
 
 public class OnBoardingViewPagerActivityAdapter extends FragmentPagerAdapter {
     public static final int PAGE_COUNT = 3;
-    private final int FRAGMENT_GOOGLE_SIGN_IN = 0;
-    private final int FRAGMENT_SIGN_IN = FRAGMENT_GOOGLE_SIGN_IN + 1;
-    private final int FRAGMENT_REGISTER = FRAGMENT_SIGN_IN + 1;
+    private final int FRAGMENT_HELPER_ONE = 0;
+    private final int FRAGMENT_HELPER_TWO = FRAGMENT_HELPER_ONE + 1;
+    private final int FRAGMENT_HELPER_THREE = FRAGMENT_HELPER_TWO + 1;
 
     public OnBoardingViewPagerActivityAdapter(FragmentManager fm) {
         super(fm);
@@ -25,14 +25,14 @@ public class OnBoardingViewPagerActivityAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case FRAGMENT_GOOGLE_SIGN_IN:
-                return new GoogleSignInFragment();
-            case FRAGMENT_SIGN_IN:
-                return new SignInFragment();
-            case FRAGMENT_REGISTER:
-                return new RegisterFragment();
+            case FRAGMENT_HELPER_ONE:
+                return new HelperOneFragment();
+            case FRAGMENT_HELPER_TWO:
+                return new HelperTwoFragment();
+            case FRAGMENT_HELPER_THREE:
+                return new HelperThreeFragment();
             default:
-                return new GoogleSignInFragment();
+                return new HelperOneFragment();
         }
     }
 

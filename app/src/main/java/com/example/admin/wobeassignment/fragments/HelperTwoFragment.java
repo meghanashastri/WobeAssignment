@@ -14,7 +14,7 @@ import com.example.admin.wobeassignment.R;
  * Created by Admin on 19-09-2017.
  */
 
-public class RegisterFragment extends Fragment {
+public class HelperTwoFragment extends Fragment {
 
     ViewPager viewPager;
 
@@ -22,7 +22,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_helper_one,
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_helper_two,
                 container, false);
         initialiseViews(rootView);
         return rootView;
