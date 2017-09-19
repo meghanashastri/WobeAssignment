@@ -46,7 +46,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         boolean isFirstTime = SharedPreferenceManager.getInstance(this).isFirstTimeLaunch();
         Intent intent = new Intent();
         if (!isFirstTime) {
-            intent.setClass(this, OnBoardingActivity.class);
+            intent.setClass(this, OnBoardingViewPagerActivity.class);
         } else {
             intent.setClass(this, DashboardActivity.class);
         }

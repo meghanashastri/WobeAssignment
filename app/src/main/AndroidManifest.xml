@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".activities.OnBoardingActivity"
+            android:name=".activities.OnBoardingViewPagerActivity"
             android:screenOrientation="portrait" />
 
         <activity
