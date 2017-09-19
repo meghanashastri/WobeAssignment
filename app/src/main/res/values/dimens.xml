@@ -8,7 +8,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="five_5dp">5dp</dimen>
     <dimen name="ten_10dp">10dp</dimen>
+    <dimen name="margin_13dp">13dp</dimen>
     <dimen name="twenty_20dp">20dp</dimen>
     <dimen name="fifty_50dp">50dp</dimen>
+    <dimen name="margin_65dp">65dp</dimen>
     <dimen name="seventy_70dp">70dp</dimen>
 </resources>
