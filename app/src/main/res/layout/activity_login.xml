@@ -39,8 +39,10 @@
                 android:id="@+id/btnGoogleSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ten_10dp"
                 android:layout_marginLeft="@dimen/thirty_30dp"
                 android:layout_marginRight="@dimen/thirty_30dp"
+                android:background="@drawable/google_sign_in_button"
                 android:padding="@dimen/twenty_20dp"
                 android:text="@string/google_sign_in"
                 android:textColor="@color/white" />
@@ -51,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/thirty_30dp"
                 android:layout_marginRight="@dimen/thirty_30dp"
+                android:background="@drawable/facebook_sign_in_button"
                 android:padding="@dimen/twenty_20dp"
                 android:text="@string/facebook_sign_in"
                 android:textColor="@color/white" />
