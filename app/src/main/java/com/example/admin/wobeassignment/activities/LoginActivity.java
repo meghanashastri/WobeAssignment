@@ -2,6 +2,7 @@ package com.example.admin.wobeassignment.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
@@ -35,9 +37,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    LoginButton loginButton;
-    CallbackManager callbackManager;
-    Button fb;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+    private Button fb, btnLogin;
+    private TextInputEditText etEmail, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +128,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private void initialiseViews() {
         Button btnGoogleSignIn = (Button) findViewById(R.id.btnGoogleSignIn);
         btnGoogleSignIn.setOnClickListener(this);
+        etEmail = (TextInputEditText) findViewById(R.id.etEmail);
+        etPassword = (TextInputEditText) findViewById(R.id.etPassword);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(this);
     }
 
 
@@ -134,6 +141,16 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         GoogleSignInFragment googleSignInFragment = new GoogleSignInFragment();
         fragmentTransaction.add(R.id.fragment_holder, googleSignInFragment, "GoogleSignIn");
         fragmentTransaction.commit();
+    }
+
+    private void validation() {
+        if (!(etEmail.getText().toString().trim().length() > 0)) {
+            Toast.makeText(this, getResources().getText(R.string.enter_email), Toast.LENGTH_SHORT).show();
+        } else if (!(etPassword.getText().toString().trim().length() > 0)) {
+            Toast.makeText(this, getResources().getText(R.string.enter_password), Toast.LENGTH_SHORT).show();
+        } else {
+            //login api call
+        }
     }
 
     @Override
@@ -147,6 +164,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 break;
             case R.id.btnFacebookSignIn:
                 loginButton.performClick();
+                break;
+            case R.id.btnLogin:
+                validation();
                 break;
 
         }

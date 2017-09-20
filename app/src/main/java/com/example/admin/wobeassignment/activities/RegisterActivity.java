@@ -2,6 +2,7 @@ package com.example.admin.wobeassignment.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
@@ -35,9 +37,10 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    LoginButton loginButton;
-    CallbackManager callbackManager;
-    Button fb;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+    private Button fb, btnRegister;
+    private TextInputEditText etFirstName, etLastName, etEmail, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +126,26 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private void initialiseViews() {
         Button btnGoogleSignUp = (Button) findViewById(R.id.btnGoogleSignUp);
         btnGoogleSignUp.setOnClickListener(this);
+        etFirstName = (TextInputEditText) findViewById(R.id.etFirstname);
+        etLastName = (TextInputEditText) findViewById(R.id.etLastname);
+        etEmail = (TextInputEditText) findViewById(R.id.etEmail);
+        etPassword = (TextInputEditText) findViewById(R.id.etPassword);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(this);
+    }
+
+    private void validation() {
+        if (!(etFirstName.getText().toString().trim().length() > 0)) {
+            Toast.makeText(this, getResources().getText(R.string.enter_first_name), Toast.LENGTH_SHORT).show();
+        } else if (!(etLastName.getText().toString().trim().length() > 0)) {
+            Toast.makeText(this, getResources().getText(R.string.enter_last_name), Toast.LENGTH_SHORT).show();
+        } else if (!(etEmail.getText().toString().trim().length() > 0)) {
+            Toast.makeText(this, getResources().getText(R.string.enter_email), Toast.LENGTH_SHORT).show();
+        } else if (!(etPassword.getText().toString().trim().length() > 0)) {
+            Toast.makeText(this, getResources().getText(R.string.enter_password), Toast.LENGTH_SHORT).show();
+        } else {
+            //register api call
+        }
     }
 
 
@@ -145,6 +168,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 break;
             case R.id.btnFacebookSignUp:
                 loginButton.performClick();
+                break;
+            case R.id.btnRegister:
+                validation();
                 break;
         }
     }

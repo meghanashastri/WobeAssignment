@@ -28,4 +28,9 @@
     <string name="password">Password</string>
     <string name="first_name">Firstname</string>
     <string name="last_name">Lastname</string>
+    <string name="enter_first_name">Please enter your Firstname</string>
+    <string name="enter_last_name">Please enter your Lastname</string>
+    <string name="enter_email">Please enter your Email</string>
+    <string name="enter_password">Please enter your Password</string>
+
 </resources>
