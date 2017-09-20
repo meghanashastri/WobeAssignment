@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.admin.wobeassignment.R;
@@ -30,8 +31,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
  */
 
 public class GoogleSignInFragment extends android.support.v4.app.Fragment implements
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+        GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
     private static String TAG = GoogleSignInFragment.class.toString();
@@ -52,7 +52,6 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         context = getContext();
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_google_sign_in,
                 container, false);
-        initialiseViews(rootView);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
@@ -60,6 +59,13 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
 
         if (CommonUtils.isConnectingToInternet(getActivity())) {
             googleSignIn();
+        } else {
+            Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        if (CommonUtils.isConnectingToInternet(getActivity())) {
+            signIn();
         } else {
             Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
                     Toast.LENGTH_SHORT).show();
@@ -85,28 +91,6 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void initialiseViews(View view) {
-        SignInButton signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.sign_in_button:
-                if (CommonUtils.isConnectingToInternet(getActivity())) {
-                    signIn();
-                } else {
-                    Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
-                            Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-
     }
 
     private void signIn() {
