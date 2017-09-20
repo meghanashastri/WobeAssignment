@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
-import com.example.admin.wobeassignment.fragments.RegisterFragment;
 
 /**
  * Created by Admin on 20-09-2017.
@@ -24,7 +24,6 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        addFragment();
         initialiseViews();
     }
 
@@ -34,19 +33,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     }
 
 
-    public void addFragment() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        RegisterFragment registerFragment = new RegisterFragment();
-        fragmentTransaction.add(R.id.fragment_holder, registerFragment, "Register");
-        fragmentTransaction.commit();
-    }
-
-    public void replaceFragment() {
+    private void addFragment() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         GoogleSignInFragment googleSignInFragment = new GoogleSignInFragment();
-        fragmentTransaction.replace(R.id.fragment_holder, googleSignInFragment, "GoogleSignIn");
+        fragmentTransaction.add(R.id.fragment_holder, googleSignInFragment, "GoogleSignIn");
         fragmentTransaction.commit();
     }
 
@@ -55,7 +46,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         int id = view.getId();
         switch (id) {
             case R.id.btnGoogleSignUp:
-                replaceFragment();
+                FrameLayout frameLayout = (FrameLayout) findViewById(R.id.fragment_layout);
+                frameLayout.setVisibility(View.VISIBLE);
+                addFragment();
                 break;
         }
     }
