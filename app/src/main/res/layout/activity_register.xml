@@ -49,16 +49,29 @@
                 android:text="@string/google_sign_up"
                 android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/btnFacebookSignUp"
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/FrameLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/thirty_30dp"
-                android:layout_marginRight="@dimen/thirty_30dp"
-                android:background="@drawable/facebook_sign_in_button"
-                android:padding="@dimen/twenty_20dp"
-                android:text="@string/facebook_sign_up"
-                android:textColor="@color/white" />
+                android:layout_height="wrap_content">
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnFacebookSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/thirty_30dp"
+                    android:layout_marginRight="@dimen/thirty_30dp"
+                    android:background="@drawable/facebook_sign_in_button"
+                    android:padding="@dimen/twenty_20dp"
+                    android:text="@string/facebook_sign_up"
+                    android:textColor="@color/white" />
+            </FrameLayout>
 
         </LinearLayout>
     </RelativeLayout>

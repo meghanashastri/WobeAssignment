@@ -26,8 +26,6 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Admin on 19-09-2017.
