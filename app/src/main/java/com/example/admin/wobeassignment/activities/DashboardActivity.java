@@ -71,8 +71,15 @@ public class DashboardActivity extends AppCompatActivity
                                 DashboardModel model = new Gson().fromJson
                                         (response.toString(), DashboardModel.class);
                                 TextView tvName = (TextView) findViewById(R.id.tvName);
+
                                 if (model.getFirstName() != null) {
                                     tvName.setText(model.getFirstName().trim());
+                                    SharedPreferenceManager.getInstance(DashboardActivity.this).
+                                            saveData(Constants.FIRST_NAME, model.getFirstName());
+                                }
+                                if (model.getLastName() != null) {
+                                    SharedPreferenceManager.getInstance(DashboardActivity.this).
+                                            saveData(Constants.LAST_NAME, model.getLastName());
                                 }
                                 TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
                                 if (model.getCredits() != null) {

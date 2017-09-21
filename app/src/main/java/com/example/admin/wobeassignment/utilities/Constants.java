@@ -7,6 +7,8 @@ package com.example.admin.wobeassignment.utilities;
 public class Constants {
 
     public static final String USERNAME = "username";
+    public static final String FIRST_NAME = "firstname";
+    public static final String LAST_NAME = "lastname";
     public static final String EMAIL = "email";
     public static final String CUSTOMER_ID = "customerId";
 
@@ -21,4 +23,6 @@ public class Constants {
             "firstName=%s" + "&lastName=%s" + "&emailAddress=%s" + "&TOKEN_ID=%s";
 
     public static String DASHBOARD_URL = BASE_URL + "WobeDashboardDetails&" + "customerID=%s";
+
+    public static String VERIFY_USER_URL = BASE_URL + "WobeVerifyCustomer&" + "email_address=%s";
 }

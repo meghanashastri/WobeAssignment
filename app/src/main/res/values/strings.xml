@@ -44,5 +44,6 @@
     <string name="description">Description</string>
     <string name="credits">Credits</string>
     <string name="verify">Verify</string>
+    <string name="invalid_user">Invalid User</string>
 
 </resources>
