@@ -130,7 +130,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btnGoogleSignIn.setOnClickListener(this);
         etEmail = (TextInputEditText) findViewById(R.id.etEmail);
         etPassword = (TextInputEditText) findViewById(R.id.etPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = (Button) findViewById(R.id.btnUserLogin);
         btnLogin.setOnClickListener(this);
     }
 
@@ -165,7 +165,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             case R.id.btnFacebookSignIn:
                 loginButton.performClick();
                 break;
-            case R.id.btnLogin:
+            case R.id.btnUserLogin:
                 validation();
                 break;
 
