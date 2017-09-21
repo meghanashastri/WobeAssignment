@@ -130,8 +130,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
                     @Override
                     public void onError(FacebookException exception) {
-                        System.out.println("onError");
-                        Log.v("LoginActivity", exception.getCause().toString());
+                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.error_message),
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
 

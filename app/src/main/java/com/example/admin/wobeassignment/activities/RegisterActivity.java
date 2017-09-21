@@ -134,8 +134,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onError(FacebookException exception) {
-                        System.out.println("onError");
-                        Log.v("RegisterActivity", exception.getCause().toString());
+                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.error_message),
+                                Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
