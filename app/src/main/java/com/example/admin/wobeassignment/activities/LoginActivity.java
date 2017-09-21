@@ -28,6 +28,8 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.internal.CallbackManagerImpl;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
@@ -52,7 +54,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         super.onCreate(savedInstanceState);
-        callbackManager = CallbackManager.Factory.create();
+
         setContentView(R.layout.activity_login);
 
 
@@ -60,6 +62,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         loginButton = (LoginButton) findViewById(R.id.login_button);
         fb.setOnClickListener(this);
 
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.setReadPermissions("email");
         loginButton.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -82,20 +86,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                                 response.toString());
                                         try {
                                             String id = object.getString("id");
-                                            try {
-                                                URL profile_pic = new URL(
-                                                        "http://graph.facebook.com/" + id + "/picture?type=large");
-                                                Log.i("profile_pic",
-                                                        profile_pic + "");
 
-                                            } catch (MalformedURLException e) {
-                                                e.printStackTrace();
-                                            }
                                             String name = object.getString("name");
                                             String email = object.getString("email");
-                                            String gender = object.getString("gender");
-                                            String birthday = object.getString("birthday");
-
+                                            String facebookId = object.getString("id");
 
                                             String firstName = null, lastName = null;
 
@@ -115,8 +109,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                                     saveData(Constants.USERNAME, name);
                                             SharedPreferenceManager.getInstance(LoginActivity.this).
                                                     saveData(Constants.EMAIL, email);
-                                            makeApiCallForFacebookLogin(firstName, lastName,
-                                                    email, "123445555");
+                                            if (facebookId != null && !facebookId.isEmpty() && name != null && !name.isEmpty() && email != null && !email.isEmpty()) {
+                                                makeApiCallForFacebookLogin(firstName, lastName,
+                                                        email, "123445555");
+                                                facebookLogOut();
+                                            }
 
 
                                         } catch (JSONException e) {
@@ -133,9 +130,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
                     @Override
                     public void onCancel() {
-                        System.out.println("onCancel");
+                        facebookLogOut();
                     }
-
                     @Override
                     public void onError(FacebookException exception) {
                         System.out.println("onError");
@@ -146,6 +142,15 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
         initialiseViews();
     }
+
+    private void facebookLogOut() {
+        try {
+            LoginManager.getInstance().logOut();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void makeApiCallForFacebookLogin(String firstName, String lastName, String email, String tokenId) {
         String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
@@ -176,11 +181,22 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
 
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int responseCode,
                                     Intent data) {
         super.onActivityResult(requestCode, responseCode, data);
         callbackManager.onActivityResult(requestCode, responseCode, data);
+    }*/
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
+                callbackManager.onActivityResult(requestCode, resultCode, data);
+            }
+        }
     }
 
 
