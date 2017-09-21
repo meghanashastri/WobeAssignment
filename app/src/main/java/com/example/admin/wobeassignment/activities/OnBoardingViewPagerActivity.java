@@ -76,14 +76,13 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
 
     private void setupPagerIndidcatorDots() {
         ivArrayDotsPager = new ImageView[3];
-
         for (int i = 0; i < ivArrayDotsPager.length; i++) {
             ivArrayDotsPager[i] = new ImageView(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(8, 0, 8, 0);
             ivArrayDotsPager[i].setLayoutParams(params);
             ivArrayDotsPager[i].setImageResource(R.drawable.unselected_indicator_dot);
-            //ivArrayDotsPager[i].setAlpha(0.4f);
             ivArrayDotsPager[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -92,12 +91,6 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
             });
             dotsLayout.addView(ivArrayDotsPager[i]);
             dotsLayout.bringToFront();
-        }
-    }
-
-    public void updateViewPagerCount(int position) {
-        if (position >= 0 && viewPager != null) {
-            viewPager.setCurrentItem(1);
         }
     }
 
