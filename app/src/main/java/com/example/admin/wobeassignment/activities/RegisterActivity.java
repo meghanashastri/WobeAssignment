@@ -18,7 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
-import com.example.admin.wobeassignment.model.CustomerAdd;
+import com.example.admin.wobeassignment.model.BaseModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
@@ -205,8 +205,8 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                     public void onResponse(JSONObject response) {
                         try {
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
-                                CustomerAdd model = new Gson().fromJson
-                                        (response.toString(), CustomerAdd.class);
+                                BaseModel model = new Gson().fromJson
+                                        (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.USERNAME, firstName);
                                 SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.EMAIL, email);

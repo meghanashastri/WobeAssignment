@@ -33,5 +33,6 @@
     <string name="enter_email">Please enter your Email</string>
     <string name="enter_password">Please enter your Password</string>
     <string name="existing_user">Existing User. Please Sign In.</string>
+    <string name="invalid_credentials">Invalid Credentials</string>
 
 </resources>

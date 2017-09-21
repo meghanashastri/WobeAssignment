@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * Created by Admin on 21-09-2017.
  */
 
-public class CustomerAdd {
+public class BaseModel {
     private String statusMessage;
     private String returnStatus;
     private BigInteger customerID;

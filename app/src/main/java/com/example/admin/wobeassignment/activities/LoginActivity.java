@@ -12,8 +12,16 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
+import com.example.admin.wobeassignment.model.BaseModel;
+import com.example.admin.wobeassignment.utilities.CommonUtils;
+import com.example.admin.wobeassignment.utilities.Constants;
+import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -22,6 +30,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,12 +44,10 @@ import java.net.URL;
 
 public class LoginActivity extends FragmentActivity implements View.OnClickListener {
 
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private Button fb, btnLogin;
     private TextInputEditText etEmail, etPassword;
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         setContentView(R.layout.activity_login);
 
 
-        fb = (Button) findViewById(R.id.btnFacebookSignIn);
+        Button fb = (Button) findViewById(R.id.btnFacebookSignIn);
         loginButton = (LoginButton) findViewById(R.id.login_button);
         fb.setOnClickListener(this);
 
@@ -130,14 +137,14 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btnGoogleSignIn.setOnClickListener(this);
         etEmail = (TextInputEditText) findViewById(R.id.etEmail);
         etPassword = (TextInputEditText) findViewById(R.id.etPassword);
-        btnLogin = (Button) findViewById(R.id.btnUserLogin);
+        Button btnLogin = (Button) findViewById(R.id.btnUserLogin);
         btnLogin.setOnClickListener(this);
     }
 
 
     private void addFragment() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         GoogleSignInFragment googleSignInFragment = new GoogleSignInFragment();
         fragmentTransaction.add(R.id.fragment_holder, googleSignInFragment, "GoogleSignIn");
         fragmentTransaction.commit();
@@ -150,6 +157,14 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             Toast.makeText(this, getResources().getText(R.string.enter_password), Toast.LENGTH_SHORT).show();
         } else {
             //login api call
+            email = etEmail.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
+            if (CommonUtils.isConnectingToInternet(LoginActivity.this)) {
+                makeApiCall();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -171,4 +186,43 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
         }
     }
+
+    private void makeApiCall() {
+        String url = String.format(Constants.LOGIN_URL, email, password);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                BaseModel model = new Gson().fromJson
+                                        (response.toString(), BaseModel.class);
+                                String customerId = model.getCustomerID().toString();
+                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.CUSTOMER_ID, customerId);
+                                goToNextActivity(DashboardActivity.class);
+                                Toast.makeText(LoginActivity.this, customerId, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalid_credentials),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+    }
+
+    protected void goToNextActivity(Class nextActivity) {
+        SharedPreferenceManager.getInstance(this).setFirstTimeLaunch(true);
+        Intent intent = new Intent();
+        intent.setClass(this, nextActivity);
+        startActivity(intent);
+        finish();
+    }
+
 }
