@@ -21,6 +21,7 @@ import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
 import com.example.admin.wobeassignment.model.CustomerAdd;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
+import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -158,8 +159,8 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             email = etEmail.getText().toString().trim();
             password = etPassword.getText().toString().trim();
             tokenId = "1234567890";
-            //register api call
 
+            //register api call
             if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
                 makeApiCall();
             } else {
@@ -207,6 +208,10 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                 CustomerAdd model = new Gson().fromJson
                                         (response.toString(), CustomerAdd.class);
                                 String customerId = model.getCustomerID().toString();
+                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.USERNAME, firstName);
+                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.EMAIL, email);
+                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.CUSTOMER_ID, customerId);
+                                goToNextActivity(DashboardActivity.class);
                                 Toast.makeText(RegisterActivity.this, customerId, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(RegisterActivity.this, getResources().getString(R.string.existing_user),
@@ -222,6 +227,14 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             }
         });
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+    }
+
+    protected void goToNextActivity(Class nextActivity) {
+        SharedPreferenceManager.getInstance(this).setFirstTimeLaunch(true);
+        Intent intent = new Intent();
+        intent.setClass(this, nextActivity);
+        startActivity(intent);
+        finish();
     }
 }
 
