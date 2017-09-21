@@ -142,7 +142,12 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             String googleId = acct.getId();
             SharedPreferenceManager.getInstance(context).saveData(Constants.USERNAME, userName);
             SharedPreferenceManager.getInstance(context).saveData(Constants.EMAIL, email);
-            makeApiCall(firstName, lastName, email, "123445555");
+            if (CommonUtils.isConnectingToInternet(getActivity())) {
+                makeApiCall(firstName, lastName, email, "123445555");
+            } else {
+                Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
+                        Toast.LENGTH_SHORT).show();
+            }
         } else {
             // Signed out, show unauthenticated UI.
             Toast.makeText(getActivity(), getResources().getString(R.string.authentication_failed),

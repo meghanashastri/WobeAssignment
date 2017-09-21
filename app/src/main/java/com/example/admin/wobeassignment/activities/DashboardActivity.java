@@ -27,6 +27,7 @@ import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.adapters.TransactionAdapter;
 import com.example.admin.wobeassignment.model.BaseModel;
 import com.example.admin.wobeassignment.model.DashboardModel;
+import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 import com.google.gson.Gson;
@@ -47,7 +48,11 @@ public class DashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         initialiseViews();
-        makeApiCall(SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID));
+        if (CommonUtils.isConnectingToInternet(DashboardActivity.this)) {
+            makeApiCall(SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID));
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -195,4 +200,15 @@ public class DashboardActivity extends AppCompatActivity
         intent.setClass(this, nextActivity);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (CommonUtils.isConnectingToInternet(DashboardActivity.this)) {
+            makeApiCall(SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID));
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

@@ -110,9 +110,16 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                                     saveData(Constants.USERNAME, name);
                                             SharedPreferenceManager.getInstance(RegisterActivity.this).
                                                     saveData(Constants.EMAIL, email);
-                                            if (facebookId != null && !facebookId.isEmpty() && name != null && !name.isEmpty() && email != null && !email.isEmpty()) {
-                                                makeApiCallForFacebookLogin(firstName, lastName,
-                                                        email, "123445555");
+                                            if (facebookId != null && !facebookId.isEmpty() && name != null
+                                                    && !name.isEmpty() && email != null && !email.isEmpty()) {
+                                                if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+                                                    makeApiCallForFacebookLogin(firstName, lastName,
+                                                            email, "123445555");
+                                                } else {
+                                                    Toast.makeText(RegisterActivity.this, getResources().
+                                                                    getString(R.string.check_internet_connection),
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
                                                 facebookLogOut();
                                             }
                                         } catch (JSONException e) {
@@ -247,7 +254,12 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 addFragment();
                 break;
             case R.id.btnFacebookSignUp:
-                loginButton.performClick();
+                if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+                    loginButton.performClick();
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                            Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btnRegister:
                 validation();
