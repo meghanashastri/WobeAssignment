@@ -85,7 +85,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                         Log.i("LoginActivity",
                                                 response.toString());
                                         try {
-                                            String id = object.getString("id");
 
                                             String name = object.getString("name");
                                             String email = object.getString("email");
@@ -103,8 +102,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                                     lastName = parts[1];
                                                 }
                                             }
-
-
                                             SharedPreferenceManager.getInstance(LoginActivity.this).
                                                     saveData(Constants.USERNAME, name);
                                             SharedPreferenceManager.getInstance(LoginActivity.this).
@@ -114,8 +111,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                                         email, "123445555");
                                                 facebookLogOut();
                                             }
-
-
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -132,6 +127,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     public void onCancel() {
                         facebookLogOut();
                     }
+
                     @Override
                     public void onError(FacebookException exception) {
                         System.out.println("onError");
@@ -179,14 +175,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         });
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
-
-
-   /* @Override
-    protected void onActivityResult(int requestCode, int responseCode,
-                                    Intent data) {
-        super.onActivityResult(requestCode, responseCode, data);
-        callbackManager.onActivityResult(requestCode, responseCode, data);
-    }*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
