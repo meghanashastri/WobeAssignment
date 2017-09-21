@@ -50,5 +50,7 @@
     <string name="enter_cedits">Enter Credits</string>
     <string name="enter_description">Enter Description</string>
     <string name="insufficient_credits">Insufficient Credit Balance</string>
+    <string name="enter_passcode">Enter Passcode</string>
+    <string name="to_login_to_app">to Login to the app</string>
 
 </resources>
