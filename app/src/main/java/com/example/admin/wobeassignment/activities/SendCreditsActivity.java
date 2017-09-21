@@ -3,6 +3,8 @@ package com.example.admin.wobeassignment.activities;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_credits);
+        initialiseToolbar();
         initialiseViews();
         fromCustomerId = SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID);
     }
@@ -51,6 +54,22 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         etDescription = (TextInputEditText) findViewById(R.id.etDescription);
         btnSendCredits = (Button) findViewById(R.id.btnSend);
         btnSendCredits.setOnClickListener(this);
+    }
+
+    public void initialiseToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getResources().getText(R.string.send_credits));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
