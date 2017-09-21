@@ -40,5 +40,9 @@
     <string name="received">RECEIVED</string>
     <string name="send_credits">Send Credits</string>
     <string name="recent_transactions">Recent Transactions</string>
+    <string name="to_email">To Email</string>
+    <string name="description">Description</string>
+    <string name="credits">Credits</string>
+    <string name="verify">Verify</string>
 
 </resources>
