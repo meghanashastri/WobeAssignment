@@ -97,6 +97,28 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                             String email = object.getString("email");
                                             String gender = object.getString("gender");
                                             String birthday = object.getString("birthday");
+
+                                            String firstName = null, lastName = null;
+
+                                            if (name != null) {
+                                                String[] parts = name.split("\\s+");
+                                                if (parts.length == 1) {
+                                                    firstName = parts[0];
+                                                    lastName = null;
+                                                } else if (parts.length == 2) {
+                                                    firstName = parts[0];
+                                                    lastName = parts[1];
+                                                }
+                                            }
+
+
+                                            SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                                    saveData(Constants.USERNAME, name);
+                                            SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                                    saveData(Constants.EMAIL, email);
+                                            makeApiCallForFacebookLogin(firstName, lastName,
+                                                    email, "123445555");
+
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -122,6 +144,34 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 });
 
         initialiseViews();
+    }
+
+    private void makeApiCallForFacebookLogin(String firstName, String lastName, String email, String tokenId) {
+        String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                BaseModel model = new Gson().fromJson
+                                        (response.toString(), BaseModel.class);
+                                String customerId = model.getCustomerID().toString();
+                                SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                        saveData(Constants.CUSTOMER_ID, customerId);
+                                goToNextActivity(DashboardActivity.class);
+                                Toast.makeText(RegisterActivity.this, customerId, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
     @Override

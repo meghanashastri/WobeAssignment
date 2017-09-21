@@ -95,6 +95,30 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                             String email = object.getString("email");
                                             String gender = object.getString("gender");
                                             String birthday = object.getString("birthday");
+
+
+                                            String firstName = null, lastName = null;
+
+                                            if (name != null) {
+                                                String[] parts = name.split("\\s+");
+                                                if (parts.length == 1) {
+                                                    firstName = parts[0];
+                                                    lastName = null;
+                                                } else if (parts.length == 2) {
+                                                    firstName = parts[0];
+                                                    lastName = parts[1];
+                                                }
+                                            }
+
+
+                                            SharedPreferenceManager.getInstance(LoginActivity.this).
+                                                    saveData(Constants.USERNAME, name);
+                                            SharedPreferenceManager.getInstance(LoginActivity.this).
+                                                    saveData(Constants.EMAIL, email);
+                                            makeApiCallForFacebookLogin(firstName, lastName,
+                                                    email, "123445555");
+
+
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -122,6 +146,35 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
         initialiseViews();
     }
+
+    private void makeApiCallForFacebookLogin(String firstName, String lastName, String email, String tokenId) {
+        String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                BaseModel model = new Gson().fromJson
+                                        (response.toString(), BaseModel.class);
+                                String customerId = model.getCustomerID().toString();
+                                SharedPreferenceManager.getInstance(LoginActivity.this).
+                                        saveData(Constants.CUSTOMER_ID, customerId);
+                                goToNextActivity(DashboardActivity.class);
+                                Toast.makeText(LoginActivity.this, customerId, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int responseCode,
@@ -159,7 +212,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
             if (CommonUtils.isConnectingToInternet(LoginActivity.this)) {
-                makeApiCall(email, password);
+                makeApiCallForLogin(email, password);
             } else {
                 Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
                         Toast.LENGTH_SHORT).show();
@@ -186,7 +239,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         }
     }
 
-    private void makeApiCall(String email, String password) {
+    private void makeApiCallForLogin(String email, String password) {
         String url = String.format(Constants.LOGIN_URL, email, password);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
