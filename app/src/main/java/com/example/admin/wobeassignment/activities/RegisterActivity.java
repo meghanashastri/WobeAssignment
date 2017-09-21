@@ -12,8 +12,15 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.fragments.GoogleSignInFragment;
+import com.example.admin.wobeassignment.model.CustomerAdd;
+import com.example.admin.wobeassignment.utilities.CommonUtils;
+import com.example.admin.wobeassignment.utilities.Constants;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -22,6 +29,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +49,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private CallbackManager callbackManager;
     private Button fb, btnRegister;
     private TextInputEditText etFirstName, etLastName, etEmail, etPassword;
+    private String firstName, lastName, email, password, tokenId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +153,19 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         } else if (!(etPassword.getText().toString().trim().length() > 0)) {
             Toast.makeText(this, getResources().getText(R.string.enter_password), Toast.LENGTH_SHORT).show();
         } else {
+            firstName = etFirstName.getText().toString().trim();
+            lastName = etLastName.getText().toString().trim();
+            email = etEmail.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
+            tokenId = "1234567890";
             //register api call
+
+            if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+                makeApiCall();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -174,4 +195,33 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 break;
         }
     }
+
+    private void makeApiCall() {
+        String url = String.format(Constants.Register_URL, firstName, lastName, email, password, tokenId);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                CustomerAdd model = new Gson().fromJson
+                                        (response.toString(), CustomerAdd.class);
+                                String customerId = model.getCustomerID().toString();
+                                Toast.makeText(RegisterActivity.this, customerId, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.existing_user),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+    }
 }
+

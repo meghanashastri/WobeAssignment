@@ -32,5 +32,6 @@
     <string name="enter_last_name">Please enter your Lastname</string>
     <string name="enter_email">Please enter your Email</string>
     <string name="enter_password">Please enter your Password</string>
+    <string name="existing_user">Existing User. Please Sign In.</string>
 
 </resources>

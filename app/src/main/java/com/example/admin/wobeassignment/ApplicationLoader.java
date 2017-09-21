@@ -18,6 +18,7 @@ public class ApplicationLoader extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
     }
 
     public static synchronized ApplicationLoader getInstance() {
