@@ -1,10 +1,12 @@
 package com.example.admin.wobeassignment.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.wobeassignment.R;
@@ -18,10 +20,15 @@ import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 public class PasscodeActivity extends AppCompatActivity {
     private EditText etOne, etTwo, etThree, etFour;
     private String passcode;
+    String passcodeBundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getIntent().getExtras();
+        passcodeBundle = bundle.getString(Constants.KEY_PASSCODE_ACTIVITY_BUNDLE);
+
         setContentView(R.layout.activity_passcode);
         initialiseViews();
     }
@@ -72,8 +79,39 @@ public class PasscodeActivity extends AppCompatActivity {
             passcode = etOne.getText().toString().trim() + etTwo.getText().toString().trim()
                     + etThree.getText().toString().trim() + etFour.getText().toString().trim();
             if (passcode.length() == 4) {
-                SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+
+                if (passcodeBundle != null) {
+                    if (passcodeBundle.equalsIgnoreCase("1")) {
+                        if (passcode.equalsIgnoreCase(SharedPreferenceManager.getInstance(PasscodeActivity.this).
+                                getString(Constants.PASSCODE))) {
+                            goToNextActivity(DashboardActivity.class);
+                        } else {
+                            Toast.makeText(PasscodeActivity.this, getResources().getString(R.string.enter_correct_passcode),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else if (passcodeBundle.equalsIgnoreCase("2")) {
+                        SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
+                        SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+                        goToNextActivity(DashboardActivity.class);
+                    } else if (passcodeBundle.equalsIgnoreCase("3")) {
+                        SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
+                        SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+                        goToNextActivity(DashboardActivity.class);
+                    } else if (passcodeBundle.equalsIgnoreCase("4")) {
+                        SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
+                        SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+                        goToNextActivity(DashboardActivity.class);
+                    }
+                }
             }
         }
     };
+
+    protected void goToNextActivity(Class nextActivity) {
+        Intent intent = new Intent();
+        intent.setClass(this, nextActivity);
+        startActivity(intent);
+        finish();
+    }
+
 }

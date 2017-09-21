@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/background_image"
     android:orientation="vertical">
 
@@ -13,6 +15,7 @@
         android:src="@drawable/app_icon_transperant" />
 
     <TextView
+        android:id="@+id/tvPasscode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -46,7 +49,8 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:paddingTop="@dimen/twenty_20dp" />
+            android:paddingTop="@dimen/twenty_20dp"
+            android:textColor="@color/colorAccent" />
 
 
         <EditText
@@ -57,7 +61,8 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:paddingTop="@dimen/twenty_20dp" />
+            android:paddingTop="@dimen/twenty_20dp"
+            android:textColor="@color/colorAccent" />
 
 
         <EditText
@@ -68,7 +73,8 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:paddingTop="@dimen/twenty_20dp" />
+            android:paddingTop="@dimen/twenty_20dp"
+            android:textColor="@color/colorAccent" />
 
 
         <EditText
@@ -79,7 +85,8 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:paddingTop="@dimen/twenty_20dp" />
+            android:paddingTop="@dimen/twenty_20dp"
+            android:textColor="@color/colorAccent" />
     </LinearLayout>
 
 </LinearLayout>

@@ -37,9 +37,6 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
  * Created by Admin on 19-09-2017.
  */
@@ -168,7 +165,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(LoginActivity.this).
                                         saveData(Constants.CUSTOMER_ID, customerId);
-                                goToNextActivity(DashboardActivity.class);
+                                goToNextActivity(PasscodeActivity.class);
                                 Toast.makeText(LoginActivity.this, customerId, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -267,7 +264,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                         (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.CUSTOMER_ID, customerId);
-                                goToNextActivity(DashboardActivity.class);
+                                goToNextActivity(PasscodeActivity.class);
                                 Toast.makeText(LoginActivity.this, customerId, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalid_credentials),
@@ -286,9 +283,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
     protected void goToNextActivity(Class nextActivity) {
-        SharedPreferenceManager.getInstance(this).setFirstTimeLaunch(true);
         Intent intent = new Intent();
         intent.setClass(this, nextActivity);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.KEY_PASSCODE_ACTIVITY_BUNDLE, Constants.VALUE_LOGIN_ACTIVITY);
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }

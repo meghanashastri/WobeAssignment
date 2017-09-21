@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.admin.wobeassignment.R;
+import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 
 /**
@@ -48,7 +49,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (!isFirstTime) {
             intent.setClass(this, OnBoardingViewPagerActivity.class);
         } else {
-            intent.setClass(this, DashboardActivity.class);
+            intent.setClass(this, PasscodeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.KEY_PASSCODE_ACTIVITY_BUNDLE, Constants.VALUE_SPLASH_SCREEN_ACTIVITY);
+            intent.putExtras(bundle);
         }
         startActivity(intent);
         finish();

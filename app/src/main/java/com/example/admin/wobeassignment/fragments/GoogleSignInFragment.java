@@ -20,6 +20,7 @@ import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.activities.DashboardActivity;
 import com.example.admin.wobeassignment.activities.LoginActivity;
+import com.example.admin.wobeassignment.activities.PasscodeActivity;
 import com.example.admin.wobeassignment.model.BaseModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
@@ -167,7 +168,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
                                         (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(context).saveData(Constants.CUSTOMER_ID, customerId);
-                                goToNextActivity(DashboardActivity.class);
+                                goToNextActivity(PasscodeActivity.class);
                                 Toast.makeText(getActivity(), customerId, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -184,9 +185,11 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
 
 
     protected void goToNextActivity(Class nextActivity) {
-        SharedPreferenceManager.getInstance(getContext()).setFirstTimeLaunch(true);
         Intent intent = new Intent();
         intent.setClass(getContext(), nextActivity);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.KEY_PASSCODE_ACTIVITY_BUNDLE, Constants.VALUE_FOR_GOOGLE_SIGN);
+        intent.putExtras(bundle);
         startActivity(intent);
         getActivity().finish();
     }

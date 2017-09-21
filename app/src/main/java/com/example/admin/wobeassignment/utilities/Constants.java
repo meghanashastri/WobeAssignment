@@ -14,6 +14,15 @@ public class Constants {
     public static final String CREDITS = "credits";
     public static final String PASSCODE = "passcode";
 
+
+    public static final String KEY_PASSCODE_ACTIVITY_BUNDLE = "PasscodeActivity";
+
+    public static final String VALUE_SPLASH_SCREEN_ACTIVITY = "1";
+    public static final String VALUE_LOGIN_ACTIVITY = "2";
+    public static final String VALUE_REGISTER_ACTIVITY = "3";
+    public static final String VALUE_FOR_GOOGLE_SIGN = "4";
+
+
     private static String BASE_URL = "https://www.axisshared.com:8443/MainPage?AXIS_API_KEY=i50c988cb_8895_44e7_ad6c_a74189f202a6&AXIS_API=";
 
     public static String Register_URL = BASE_URL + "WobeCustomerAdd&" +
