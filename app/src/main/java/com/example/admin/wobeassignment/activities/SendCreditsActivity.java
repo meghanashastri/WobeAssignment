@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,9 @@ import org.json.JSONObject;
  */
 
 public class SendCreditsActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView tvVerify;
+    private TextInputEditText etCredits, etDescription;
+    private Button btnSendCredits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,12 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void initialiseViews() {
-        TextView tvVerify = (TextView) findViewById(R.id.tvVerify);
+        tvVerify = (TextView) findViewById(R.id.tvVerify);
         tvVerify.setOnClickListener(this);
+        etCredits = (TextInputEditText) findViewById(R.id.etCredits);
+        etDescription = (TextInputEditText) findViewById(R.id.etDescription);
+        btnSendCredits = (Button) findViewById(R.id.btnSend);
+        btnSendCredits.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +64,8 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                     Toast.makeText(this, getResources().getString(R.string.enter_email_to_verify), Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.btnSend:
+                break;
         }
     }
 
@@ -70,6 +80,10 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 VerifyUserModel model = new Gson().fromJson
                                         (response.toString(), VerifyUserModel.class);
                                 String customerId = model.getCUSTOMER_ID().toString();
+                                tvVerify.setVisibility(View.GONE);
+                                etCredits.setEnabled(true);
+                                etDescription.setEnabled(true);
+                                btnSendCredits.setEnabled(true);
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().
                                                 getString(R.string.invalid_user),

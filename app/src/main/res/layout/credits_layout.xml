@@ -51,7 +51,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/colorPrimary"
                 app:hintTextAppearance="@style/MyAppearance">
 
                 <android.support.design.widget.TextInputEditText
@@ -61,7 +61,7 @@
                     android:ellipsize="end"
                     android:hint="@string/to_email"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_14sp" />
             </android.support.design.widget.TextInputLayout>
 
@@ -82,45 +82,51 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorPrimary"
             app:hintTextAppearance="@style/MyAppearance">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/etCredits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:hint="@string/credits"
                 android:inputType="number"
                 android:textColor="@color/white"
+                android:textColorHint="@color/colorPrimary"
                 android:textSize="@dimen/text_size_14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorPrimary"
             app:hintTextAppearance="@style/MyAppearance">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:hint="@string/description"
                 android:textColor="@color/white"
+                android:textColorHint="@color/colorPrimary"
                 android:textSize="@dimen/text_size_14sp" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/thirty_30dp"
             android:background="@drawable/button_primary_color"
+            android:enabled="false"
             android:paddingEnd="@dimen/thirty_30dp"
             android:paddingLeft="@dimen/thirty_30dp"
             android:paddingRight="@dimen/thirty_30dp"
             android:paddingStart="@dimen/thirty_30dp"
-            android:text="@string/send_credits" />
+            android:text="@string/send" />
 
     </LinearLayout>
 
