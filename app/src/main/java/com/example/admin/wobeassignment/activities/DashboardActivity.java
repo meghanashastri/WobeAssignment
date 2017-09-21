@@ -84,6 +84,8 @@ public class DashboardActivity extends AppCompatActivity
                                 TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
                                 if (model.getCredits() != null) {
                                     tvBalance.setText(model.getCredits());
+                                    SharedPreferenceManager.getInstance(DashboardActivity.this).
+                                            saveData(Constants.CREDITS, model.getCredits());
                                 }
 
                                 if (model.getTransaction().size() > 0) {
