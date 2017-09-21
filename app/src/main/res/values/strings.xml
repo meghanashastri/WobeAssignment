@@ -39,5 +39,6 @@
     <string name="sent">SENT</string>
     <string name="received">RECEIVED</string>
     <string name="send_credits">Send Credits</string>
+    <string name="recent_transactions">Recent Transactions</string>
 
 </resources>

@@ -5,9 +5,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/transperant_background_image"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.admin.wobeassignment.activities.DashboardActivity"
@@ -47,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/detailsLayout"
+        android:background="@color/credits_layout_color"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/ten_10dp"
         android:paddingTop="@dimen/ten_10dp"
@@ -155,5 +154,23 @@
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_20sp" />
+
+    <TextView
+        android:id="@+id/tvRecentTransactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSendCredits"
+        android:layout_marginTop="@dimen/fifty_50dp"
+        android:padding="@dimen/ten_10dp"
+        android:text="@string/recent_transactions"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_18sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvRecentTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRecentTransactions"
+        android:layout_margin="@dimen/ten_10dp" />
 
 </RelativeLayout>
