@@ -45,7 +45,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
             case R.id.tvVerify:
                 TextInputEditText etEmail = (TextInputEditText) findViewById(R.id.etEmail);
                 String email = etEmail.getText().toString().trim();
-                if (email != null) {
+                if (email != null && !email.isEmpty()) {
                     if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
                         verifyUser(email);
                     } else {
@@ -53,9 +53,8 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(this, getResources().getString(R.string.enter_email), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.enter_email_to_verify), Toast.LENGTH_SHORT).show();
                 }
-
                 break;
         }
     }
