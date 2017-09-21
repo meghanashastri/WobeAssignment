@@ -13,8 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.activities.DashboardActivity;
+import com.example.admin.wobeassignment.activities.LoginActivity;
+import com.example.admin.wobeassignment.model.BaseModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
@@ -25,6 +31,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Admin on 19-09-2017.
@@ -115,17 +125,58 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             String userName = acct.getDisplayName();
+            String firstName = null, lastName = null;
+
+            if (userName != null) {
+                String[] parts = userName.split("\\s+");
+                if (parts.length == 1) {
+                    firstName = parts[0];
+                    lastName = null;
+                } else if (parts.length == 2) {
+                    firstName = parts[0];
+                    lastName = parts[1];
+                }
+            }
+
             String email = acct.getEmail();
             String googleId = acct.getId();
             SharedPreferenceManager.getInstance(context).saveData(Constants.USERNAME, userName);
             SharedPreferenceManager.getInstance(context).saveData(Constants.EMAIL, email);
-            goToNextActivity(DashboardActivity.class);
+            makeApiCall(firstName, lastName, email, "123445555");
         } else {
             // Signed out, show unauthenticated UI.
             Toast.makeText(getActivity(), getResources().getString(R.string.authentication_failed),
                     Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void makeApiCall(String firstName, String lastName, String email, String tokenId) {
+        String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                BaseModel model = new Gson().fromJson
+                                        (response.toString(), BaseModel.class);
+                                String customerId = model.getCustomerID().toString();
+                                SharedPreferenceManager.getInstance(context).saveData(Constants.CUSTOMER_ID, customerId);
+                                goToNextActivity(DashboardActivity.class);
+                                Toast.makeText(getActivity(), customerId, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+    }
+
 
     protected void goToNextActivity(Class nextActivity) {
         SharedPreferenceManager.getInstance(getContext()).setFirstTimeLaunch(true);

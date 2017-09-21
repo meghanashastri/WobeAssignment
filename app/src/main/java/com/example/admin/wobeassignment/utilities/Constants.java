@@ -16,4 +16,7 @@ public class Constants {
             "firstName=%s" + "&lastName=%s" + "&emailAddress=%s" + "&userPassword=%s" + "&TOKEN_ID=%s";
 
     public static String LOGIN_URL = BASE_URL + "WobeSignIn&" + "emailAddress=%s" + "&userPassword=%s";
+
+    public static String SOCIAL_LOGIN_URL = BASE_URL + "WobeCustomerAddSocial&" +
+            "firstName=%s" + "&lastName=%s" + "&emailAddress=%s" + "&TOKEN_ID=%s";
 }

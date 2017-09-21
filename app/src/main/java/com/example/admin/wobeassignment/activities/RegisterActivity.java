@@ -50,7 +50,6 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private CallbackManager callbackManager;
     private Button fb, btnRegister;
     private TextInputEditText etFirstName, etLastName, etEmail, etPassword;
-    private String firstName, lastName, email, password, tokenId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,15 +153,15 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         } else if (!(etPassword.getText().toString().trim().length() > 0)) {
             Toast.makeText(this, getResources().getText(R.string.enter_password), Toast.LENGTH_SHORT).show();
         } else {
-            firstName = etFirstName.getText().toString().trim();
-            lastName = etLastName.getText().toString().trim();
-            email = etEmail.getText().toString().trim();
-            password = etPassword.getText().toString().trim();
-            tokenId = "1234567890";
+            String firstName = etFirstName.getText().toString().trim();
+            String lastName = etLastName.getText().toString().trim();
+            String email = etEmail.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
+            String tokenId = "1234567890";
 
             //register api call
             if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
-                makeApiCall();
+                makeApiCall(firstName, lastName, email, password, tokenId);
             } else {
                 Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
                         Toast.LENGTH_SHORT).show();
@@ -197,7 +196,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
-    private void makeApiCall() {
+    private void makeApiCall(final String firstName, String lastName, final String email, String password, String tokenId) {
         String url = String.format(Constants.Register_URL, firstName, lastName, email, password, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {

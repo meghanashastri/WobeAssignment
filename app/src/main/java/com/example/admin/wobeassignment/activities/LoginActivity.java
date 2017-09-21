@@ -47,7 +47,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private TextInputEditText etEmail, etPassword;
-    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,10 +156,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             Toast.makeText(this, getResources().getText(R.string.enter_password), Toast.LENGTH_SHORT).show();
         } else {
             //login api call
-            email = etEmail.getText().toString().trim();
-            password = etPassword.getText().toString().trim();
+            String email = etEmail.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
             if (CommonUtils.isConnectingToInternet(LoginActivity.this)) {
-                makeApiCall();
+                makeApiCall(email, password);
             } else {
                 Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
                         Toast.LENGTH_SHORT).show();
@@ -187,7 +186,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         }
     }
 
-    private void makeApiCall() {
+    private void makeApiCall(String email, String password) {
         String url = String.format(Constants.LOGIN_URL, email, password);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
