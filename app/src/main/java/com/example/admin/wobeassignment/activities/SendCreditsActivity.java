@@ -1,11 +1,17 @@
 package com.example.admin.wobeassignment.activities;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -192,9 +198,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
-
-                                //sucess dialog to be shown
-                                Toast.makeText(SendCreditsActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                showSuccessDialog();
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().getString(R.string.error_message),
                                         Toast.LENGTH_SHORT).show();
@@ -209,6 +213,25 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
             }
         });
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+    }
+
+    private void showSuccessDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) this.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.custom_dialog, null);
+        Button ok = (Button) view.findViewById(R.id.btnOk);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        dialog.setContentView(view);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
 }
