@@ -64,8 +64,8 @@
                     android:gravity="center"
                     android:text="@string/name"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size_16sp" />
+                    android:textSize="@dimen/text_size_16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvName"
@@ -91,8 +91,9 @@
                     android:layout_weight="0.5"
                     android:gravity="center"
                     android:text="@string/email_is"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/text_size_16sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvEmail"
@@ -102,7 +103,6 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
                     android:textSize="@dimen/text_size_16sp" />
 
             </LinearLayout>

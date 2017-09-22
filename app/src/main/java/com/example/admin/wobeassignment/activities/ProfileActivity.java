@@ -39,7 +39,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        if (SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME) != null) {
+        if (SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME) != null &&
+                SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.LAST_NAME) != null) {
+            tvName.setText(SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME +
+                    SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.LAST_NAME)));
+        }else if (SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME) != null){
             tvName.setText(SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME));
         }
 

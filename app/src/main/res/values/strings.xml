@@ -22,7 +22,7 @@
     <string name="authentication_failed">Authentication Failed</string>
     <string name="google_sign_in">Sign In with Google</string>
     <string name="facebook_sign_in">Sign In with Facebook</string>
-    <string name="google_sign_up"> Sign Up with Google</string>
+    <string name="google_sign_up">Sign Up with Google</string>
     <string name="facebook_sign_up">Sign Up with Facebook</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:hint="@string/to_email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:maxLength="45" />
 
             <Button
                 android:id="@+id/tvVerify"
@@ -80,6 +81,7 @@
             android:enabled="false"
             android:hint="@string/credits"
             android:inputType="number"
+            android:maxLength="10"
             android:textColor="@drawable/edit_text_selection"
             android:textColorHint="@color/edit_text_disable_color" />
 
