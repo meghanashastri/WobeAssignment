@@ -223,19 +223,25 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             String password = etPassword.getText().toString().trim();
             String tokenId = "1234567890";
 
-            if (isValidEmail(email)) {
-                //register api call
-                if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
-                    makeApiCall(firstName, lastName, email, password, tokenId);
+            if (firstName.length() >= 4) {
+                if (isValidEmail(email)) {
+                    if (password.length() >= 6) {
+                        //register api call
+                        if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+                            makeApiCall(firstName, lastName, email, password, tokenId);
+                        } else {
+                            Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, getResources().getString(R.string.min_password), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.enter_valid_email), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(this, getResources().getString(R.string.enter_valid_email), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.min_first_name), Toast.LENGTH_SHORT).show();
             }
-
-
         }
     }
 
