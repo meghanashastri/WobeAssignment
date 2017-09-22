@@ -1,6 +1,7 @@
 package com.example.admin.wobeassignment.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.wobeassignment.R;
+import com.example.admin.wobeassignment.activities.DashboardActivity;
 import com.example.admin.wobeassignment.model.TransactionModel;
+import com.example.admin.wobeassignment.utilities.Constants;
+import com.example.admin.wobeassignment.utilities.FontManager;
+import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by Admin on 21-09-2017.
@@ -42,6 +50,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final TransactionModel model = transactionModelList.get(position);
+        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
+        holder.ivTransactionImage.setTypeface(iconFont);
 
         if (model != null) {
             if (model.getToFirstName() != null && model.getToLastName() != null) {
@@ -57,6 +67,23 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             } else {
                 holder.tvTransactionTimestamp.setVisibility(View.GONE);
             }
+
+
+            if (SharedPreferenceManager.getInstance(context).getString(Constants.CUSTOMER_ID).
+                    equalsIgnoreCase(model.getFromCustomerID().toString())) {
+                holder.ivTransactionImage.setText(context.getResources().getString(R.string.sent_icon));
+                holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.google_red));
+            } else if (SharedPreferenceManager.getInstance(context).getString(Constants.CUSTOMER_ID).
+                    equalsIgnoreCase(model.getToCustomerID().toString())) {
+                if (model.getFromCustomerID() == null) {
+                    holder.ivTransactionImage.setText(context.getResources().getString(R.string.added_icon));
+                    holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+                } else {
+                    holder.ivTransactionImage.setText(context.getResources().getString(R.string.received_icon));
+                    holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorAccent));
+                }
+            }
+
 
             if (model.getCredits().toString() != null) {
                 holder.tvCredits.setText(model.getCredits().toString());
@@ -81,7 +108,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private View mView;
         private TextView tvTransactionTimestamp, tvCredits, tvTransactionName, tvTransactionDescription;
-        private ImageView ivTransactionImage;
+        private TextView ivTransactionImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -89,7 +116,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             tvCredits = (TextView) itemView.findViewById(R.id.tvCredits);
             tvTransactionName = (TextView) itemView.findViewById(R.id.tvTransactionName);
             tvTransactionDescription = (TextView) itemView.findViewById(R.id.tvTransactionDescription);
-            ivTransactionImage = (ImageView) itemView.findViewById(R.id.ivTransactionImage);
+            ivTransactionImage = (TextView) itemView.findViewById(R.id.ivTransactionImage);
             mView = itemView;
         }
 

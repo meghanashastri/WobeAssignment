@@ -27,17 +27,19 @@
             android:padding="@dimen/ten_10dp"
             android:textColor="@color/colorPrimary" />
 
-        <ImageView
+        <TextView
             android:id="@+id/ivTransactionImage"
-            android:layout_width="@dimen/twenty_20dp"
-            android:layout_height="@dimen/twenty_20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:textSize="@dimen/text_size_24sp"
             android:layout_below="@id/tvTransactionTimestamp"
             android:layout_marginLeft="@dimen/twenty_20dp"
+            android:layout_marginRight="@dimen/ten_10dp"
+            android:layout_marginEnd="@dimen/ten_10dp"
             android:layout_marginStart="@dimen/twenty_20dp"
-            android:layout_marginTop="@dimen/five_5dp"
-            android:src="@drawable/up_arrow" />
+            android:layout_marginTop="@dimen/ten_10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
