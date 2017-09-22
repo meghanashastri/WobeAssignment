@@ -60,16 +60,17 @@
                 android:hint="@string/to_email"
                 android:inputType="textEmailAddress" />
 
-            <TextView
+            <Button
                 android:id="@+id/tvVerify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/seventy_70dp"
+                android:layout_height="@dimen/thirty_30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="@string/verify"
+                android:background="@drawable/button_red"
                 android:textColor="@color/google_red"
-                android:textSize="@dimen/text_size_18sp" />
+                android:textSize="@dimen/text_size_14sp" />
 
         </RelativeLayout>
 

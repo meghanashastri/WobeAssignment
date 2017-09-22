@@ -41,9 +41,8 @@ import java.math.BigInteger;
  */
 
 public class SendCreditsActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView tvVerify;
     private EditText etCredits, etDescription, etEmail;
-    private Button btnSendCredits;
+    private Button btnSendCredits, tvVerify;
     private String toCustomerId, fromCustomerId, toFirstName;
     private TextView tvName, tvBalance;
 
@@ -58,7 +57,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
 
     private void initialiseViews() {
         etEmail = (EditText) findViewById(R.id.etEmail);
-        tvVerify = (TextView) findViewById(R.id.tvVerify);
+        tvVerify = (Button) findViewById(R.id.tvVerify);
         tvVerify.setOnClickListener(this);
         etCredits = (EditText) findViewById(R.id.etCredits);
         etDescription = (EditText) findViewById(R.id.etDescription);
@@ -103,9 +102,9 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                 String email = etEmail.getText().toString().trim();
                 if (email != null && !email.isEmpty()) {
                     if (email.equalsIgnoreCase(SharedPreferenceManager.getInstance(SendCreditsActivity.this).
-                            getString(Constants.EMAIL))){
+                            getString(Constants.EMAIL))) {
                         Toast.makeText(this, getString(R.string.cannot_send_credits), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
                             verifyUserApiCall(email);
                         } else {
