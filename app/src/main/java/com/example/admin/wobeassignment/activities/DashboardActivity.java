@@ -1,5 +1,6 @@
 package com.example.admin.wobeassignment.activities;
 
+import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -272,6 +273,21 @@ public class DashboardActivity extends AppCompatActivity
             makeApiCall(SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID));
         } else {
             Toast.makeText(this, getResources().getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (ApplicationLoader.wasInBackground) {
+            Intent intent = new Intent();
+            intent.setClass(this, PasscodeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.KEY_PASSCODE_ACTIVITY_BUNDLE, Constants.VALUE_SPLASH_SCREEN_ACTIVITY);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+            ApplicationLoader.wasInBackground = false;
         }
     }
 
