@@ -60,5 +60,7 @@
     <string name="logout">Logout</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="name">Name :</string>
+    <string name="email_is">Email :</string>
 
 </resources>

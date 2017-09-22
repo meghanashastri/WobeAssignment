@@ -62,7 +62,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         btnSendCredits.setOnClickListener(this);
     }
 
-    public void initialiseToolbar() {
+    private void initialiseToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getText(R.string.send_credits));
