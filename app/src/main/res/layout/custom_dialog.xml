@@ -17,25 +17,26 @@
         android:layout_marginTop="@dimen/ten_10dp"
         android:text="@string/transaction_successful"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_16sp" />
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/success"
-        android:text="@string/thumbs_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/twenty_20dp"
-        android:textSize="@dimen/text_size_20sp"
-        android:textColor="@color/colorPrimary"/>
+        android:text="@string/thumbs_up"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_20sp" />
 
     <Button
         android:id="@+id/btnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="@dimen/twenty_20dp"
         android:layout_marginBottom="@dimen/ten_10dp"
+        android:layout_marginTop="@dimen/twenty_20dp"
         android:background="@drawable/button_primary_color"
         android:text="@string/ok"
         android:textColor="@color/colorPrimary" />

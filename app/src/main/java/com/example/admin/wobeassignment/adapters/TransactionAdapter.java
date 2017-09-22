@@ -53,13 +53,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.ivTransactionImage.setTypeface(iconFont);
 
         if (model != null) {
-            if (model.getToFirstName() != null && model.getToLastName() != null) {
-                holder.tvTransactionName.setText(model.getToFirstName() + " " + model.getToLastName());
-            } else if (model.getToFirstName() != null) {
-                holder.tvTransactionName.setText(model.getToFirstName());
-            } else {
-                holder.tvTransactionName.setVisibility(View.GONE);
-            }
 
             if (model.getTransactionDate() != null) {
                 holder.tvTransactionTimestamp.setText(model.getTransactionDate());
@@ -71,15 +64,36 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             if (SharedPreferenceManager.getInstance(context).getString(Constants.CUSTOMER_ID).
                     equalsIgnoreCase(model.getFromCustomerID().toString())) {
                 holder.ivTransactionImage.setText(context.getResources().getString(R.string.sent_icon));
+                if (model.getToFirstName() != null && model.getToLastName() != null) {
+                    holder.tvTransactionName.setText(model.getToFirstName() + " " + model.getToLastName());
+                } else if (model.getToFirstName() != null) {
+                    holder.tvTransactionName.setText(model.getToFirstName());
+                } else {
+                    holder.tvTransactionName.setVisibility(View.GONE);
+                }
                 holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.google_red));
             } else if (SharedPreferenceManager.getInstance(context).getString(Constants.CUSTOMER_ID).
                     equalsIgnoreCase(model.getToCustomerID().toString())) {
                 if (model.getFromCustomerID().compareTo(BigInteger.valueOf(999999999)) == 0) {
                     holder.ivTransactionImage.setText(context.getResources().getString(R.string.added_icon));
                     holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+                    if (model.getToFirstName() != null && model.getToLastName() != null) {
+                        holder.tvTransactionName.setText(model.getFromFirstName() + " " + model.getFromLastName());
+                    } else if (model.getToFirstName() != null) {
+                        holder.tvTransactionName.setText(model.getFromLastName());
+                    } else {
+                        holder.tvTransactionName.setVisibility(View.GONE);
+                    }
                 } else {
                     holder.ivTransactionImage.setText(context.getResources().getString(R.string.received_icon));
                     holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorAccent));
+                    if (model.getToFirstName() != null && model.getToLastName() != null) {
+                        holder.tvTransactionName.setText(model.getToFirstName() + " " + model.getToLastName());
+                    } else if (model.getToFirstName() != null) {
+                        holder.tvTransactionName.setText(model.getFromLastName());
+                    } else {
+                        holder.tvTransactionName.setVisibility(View.GONE);
+                    }
                 }
             }
 
