@@ -43,6 +43,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     private EditText etCredits, etDescription, etEmail;
     private Button btnSendCredits;
     private String toCustomerId, fromCustomerId, toFirstName;
+    private TextView tvName, tvBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,19 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         etDescription = (EditText) findViewById(R.id.etDescription);
         btnSendCredits = (Button) findViewById(R.id.btnSend);
         btnSendCredits.setOnClickListener(this);
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvBalance = (TextView) findViewById(R.id.tvBalance);
+
+        if (SharedPreferenceManager.getInstance(SendCreditsActivity.this).getString(Constants.FIRST_NAME) != null) {
+            tvName.setText(SharedPreferenceManager.getInstance(SendCreditsActivity.this).getString(Constants.FIRST_NAME));
+        }
+
+        if (SharedPreferenceManager.getInstance(SendCreditsActivity.this).getString(Constants.CREDITS) != null) {
+            tvBalance.setText(getResources().getString(R.string.balance) + SharedPreferenceManager.
+                    getInstance(SendCreditsActivity.this).getString(Constants.CREDITS));
+        }
+
+
     }
 
     private void initialiseToolbar() {

@@ -65,5 +65,6 @@
     <string name="no">No</string>
     <string name="name">Name :</string>
     <string name="email_is">Email :</string>
+    <string name="balance">Balance: </string>
 
 </resources>
