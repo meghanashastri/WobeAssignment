@@ -102,11 +102,16 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
             case R.id.tvVerify:
                 String email = etEmail.getText().toString().trim();
                 if (email != null && !email.isEmpty()) {
-                    if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
-                        verifyUserApiCall(email);
-                    } else {
-                        Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
-                                Toast.LENGTH_SHORT).show();
+                    if (email.equalsIgnoreCase(SharedPreferenceManager.getInstance(SendCreditsActivity.this).
+                            getString(Constants.EMAIL))){
+                        Toast.makeText(this, getString(R.string.cannot_send_credits), Toast.LENGTH_SHORT).show();
+                    }else {
+                        if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
+                            verifyUserApiCall(email);
+                        } else {
+                            Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else {
                     Toast.makeText(this, getResources().getString(R.string.enter_email_to_verify), Toast.LENGTH_SHORT).show();
