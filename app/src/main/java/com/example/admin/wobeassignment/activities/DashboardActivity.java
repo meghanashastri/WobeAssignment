@@ -30,6 +30,7 @@ import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.adapters.TransactionAdapter;
 import com.example.admin.wobeassignment.model.DashboardModel;
+import com.example.admin.wobeassignment.model.TransactionModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
@@ -38,10 +39,14 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private RecyclerView recyclerView;
+    private TextView tvAdded, tvSent, tvReceived;
     private TransactionAdapter adapter;
     Toolbar toolbar;
 
@@ -60,8 +65,7 @@ public class DashboardActivity extends AppCompatActivity
         initialiseNavigationDrawer();
     }
 
-
-    public void initialiseNavigationDrawer() {
+    private void initialiseNavigationDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
@@ -119,6 +123,12 @@ public class DashboardActivity extends AppCompatActivity
                                 }
 
                                 if (model.getTransaction().size() > 0) {
+                                    List<Integer> list = getSentAndRececivedList(model.getTransaction());
+                                    if (list.size()>0){
+                                        tvAdded.setText(String.valueOf(list.get(0)));
+                                        tvSent.setText(String.valueOf(list.get(1)));
+                                        tvReceived.setText(String.valueOf(list.get(2)));
+                                    }
                                     adapter.setDataInAdapter(model.getTransaction());
                                     recyclerView.setAdapter(adapter);
                                 } else {
@@ -138,6 +148,32 @@ public class DashboardActivity extends AppCompatActivity
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
+    private List<Integer> getSentAndRececivedList(List<TransactionModel> transaction) {
+
+        int sent = 0, received = 0, added = 0;
+
+        for (int i = 0; i < transaction.size(); i++) {
+            if (SharedPreferenceManager.getInstance(DashboardActivity.this).getString(Constants.CUSTOMER_ID).
+                    equalsIgnoreCase(transaction.get(i).getFromCustomerID().toString())) {
+                sent = sent + Integer.parseInt(transaction.get(i).getCredits().toString());
+            } else if (SharedPreferenceManager.getInstance(DashboardActivity.this).getString(Constants.CUSTOMER_ID).
+                    equalsIgnoreCase(transaction.get(i).getToCustomerID().toString())) {
+                if (transaction.get(i).getFromCustomerID() == null) {
+                    added = added + Integer.parseInt(transaction.get(i).getCredits().toString());
+                } else {
+                    received = received + Integer.parseInt(transaction.get(i).getCredits().toString());
+                }
+            }
+        }
+
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(added);
+        list.add(sent);
+        list.add(received);
+
+        return list;
+    }
+
 
     private void initialiseViews() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -151,6 +187,9 @@ public class DashboardActivity extends AppCompatActivity
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        tvAdded = (TextView) findViewById(R.id.tvAdded);
+        tvSent = (TextView) findViewById(R.id.tvSent);
+        tvReceived = (TextView) findViewById(R.id.tvReceived);
     }
 
     @Override
