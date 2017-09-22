@@ -56,5 +56,9 @@
     <string name="to_login_to_app">to Login to the app</string>
     <string name="transaction_successful">Transaction Successful</string>
     <string name="ok">OK</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

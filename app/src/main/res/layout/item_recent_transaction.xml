@@ -14,7 +14,6 @@
             android:id="@+id/tvTransactionTimestamp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="17th September 2017 10:17 AM"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_16sp" />
 
@@ -26,7 +25,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/ten_10dp"
-            android:text="200"
             android:textColor="@color/colorPrimary" />
 
         <ImageView
@@ -57,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:text="Meghana Shastri"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_16sp" />
 
@@ -66,7 +63,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:text="Recharge of Airtel Mobile"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_12sp" />
 
