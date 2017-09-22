@@ -58,14 +58,30 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/five_5dp"
-                android:text="@string/added"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_20sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/added"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
+
+                <TextView
+                    android:id="@+id/iconAdded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/five_5dp"
+                    android:layout_marginStart="@dimen/five_5dp"
+                    android:text="@string/added_icon"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvAdded"
@@ -88,14 +104,32 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/five_5dp"
-                android:text="@string/sent"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_20sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sent"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
+
+                <TextView
+                    android:id="@+id/iconSent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five_5dp"
+                    android:layout_marginLeft="@dimen/five_5dp"
+                    android:layout_marginStart="@dimen/five_5dp"
+                    android:text="@string/sent_icon"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size_20sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvSent"
@@ -118,21 +152,39 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/five_5dp"
-                android:text="@string/received"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_20sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/received"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
+
+                <TextView
+                    android:id="@+id/iconReceived"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/five_5dp"
+                    android:layout_marginStart="@dimen/five_5dp"
+                    android:text="@string/received_icon"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tvReceived"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/google_red"
                 android:textSize="@dimen/text_size_18sp" />
 
         </LinearLayout>

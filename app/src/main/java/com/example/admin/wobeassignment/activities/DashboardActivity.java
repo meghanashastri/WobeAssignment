@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ import com.example.admin.wobeassignment.model.DashboardModel;
 import com.example.admin.wobeassignment.model.TransactionModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
+import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 import com.google.gson.Gson;
 
@@ -177,6 +179,13 @@ public class DashboardActivity extends AppCompatActivity
 
 
     private void initialiseViews() {
+        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
+        TextView iconAdded = (TextView) findViewById(R.id.iconAdded);
+        iconAdded.setTypeface(iconFont);
+        TextView iconSent = (TextView) findViewById(R.id.iconSent);
+        iconSent.setTypeface(iconFont);
+        TextView iconReceived = (TextView) findViewById(R.id.iconReceived);
+        iconReceived.setTypeface(iconFont);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Button btnSendCredits = (Button) findViewById(R.id.btnSendCredits);
