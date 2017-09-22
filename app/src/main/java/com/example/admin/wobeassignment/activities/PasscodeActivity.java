@@ -81,7 +81,7 @@ public class PasscodeActivity extends AppCompatActivity {
             if (passcode.length() == 4) {
 
                 if (passcodeBundle != null) {
-                    if (passcodeBundle.equalsIgnoreCase("1")) {
+                    if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_SPLASH_SCREEN_ACTIVITY)) {
                         if (passcode.equalsIgnoreCase(SharedPreferenceManager.getInstance(PasscodeActivity.this).
                                 getString(Constants.PASSCODE))) {
                             goToNextActivity(DashboardActivity.class);
@@ -89,17 +89,17 @@ public class PasscodeActivity extends AppCompatActivity {
                             Toast.makeText(PasscodeActivity.this, getResources().getString(R.string.enter_correct_passcode),
                                     Toast.LENGTH_SHORT).show();
                         }
-                    } else if (passcodeBundle.equalsIgnoreCase("2")) {
+                    } else if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_LOGIN_ACTIVITY)) {
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
                         OnBoardingViewPagerActivity.getInstance().finish();
                         goToNextActivity(DashboardActivity.class);
-                    } else if (passcodeBundle.equalsIgnoreCase("3")) {
+                    } else if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_REGISTER_ACTIVITY)) {
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
                         OnBoardingViewPagerActivity.getInstance().finish();
                         goToNextActivity(DashboardActivity.class);
-                    } else if (passcodeBundle.equalsIgnoreCase("4")) {
+                    } else if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_FOR_GOOGLE_SIGN)) {
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
                         OnBoardingViewPagerActivity.getInstance().finish();
