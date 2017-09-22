@@ -140,6 +140,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 etDescription.setEnabled(true);
                                 etDescription.setHintTextColor(getResources().getColor(R.color.colorPrimary));
                                 btnSendCredits.setEnabled(true);
+                                etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
                                 toFirstName = email;
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().
