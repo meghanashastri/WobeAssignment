@@ -20,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_65dp"
-        android:text="@string/enter_passcode"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/text_size_20sp" />
 

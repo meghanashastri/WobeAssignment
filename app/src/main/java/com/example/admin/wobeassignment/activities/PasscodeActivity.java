@@ -20,7 +20,8 @@ import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 public class PasscodeActivity extends AppCompatActivity {
     private EditText etOne, etTwo, etThree, etFour;
     private String passcode;
-    String passcodeBundle;
+    private String passcodeBundle;
+    private TextView tvPasscode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,21 @@ public class PasscodeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_passcode);
         initialiseViews();
+        setPasscodeTitle();
+    }
+
+    private void setPasscodeTitle() {
+        if (passcodeBundle != null) {
+            if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_SPLASH_SCREEN_ACTIVITY)) {
+                tvPasscode.setText(getResources().getString(R.string.enter_passcode));
+            } else if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_LOGIN_ACTIVITY)) {
+                tvPasscode.setText(getResources().getString(R.string.set_passcode));
+            } else if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_REGISTER_ACTIVITY)) {
+                tvPasscode.setText(getResources().getString(R.string.set_passcode));
+            } else if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_FOR_GOOGLE_SIGN)) {
+                tvPasscode.setText(getResources().getString(R.string.set_passcode));
+            }
+        }
     }
 
     private void initialiseViews() {
@@ -43,6 +59,7 @@ public class PasscodeActivity extends AppCompatActivity {
         etThree.addTextChangedListener(passcodeEntered);
         etFour = (EditText) findViewById(R.id.etFour);
         etFour.addTextChangedListener(passcodeCheck);
+        tvPasscode = (TextView) findViewById(R.id.tvPasscode);
     }
 
     private final TextWatcher passcodeEntered = new TextWatcher() {
@@ -84,6 +101,7 @@ public class PasscodeActivity extends AppCompatActivity {
                     if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_SPLASH_SCREEN_ACTIVITY)) {
                         if (passcode.equalsIgnoreCase(SharedPreferenceManager.getInstance(PasscodeActivity.this).
                                 getString(Constants.PASSCODE))) {
+                            tvPasscode.setText(getResources().getString(R.string.enter_passcode));
                             goToNextActivity(DashboardActivity.class);
                         } else {
                             Toast.makeText(PasscodeActivity.this, getResources().getString(R.string.enter_correct_passcode),
