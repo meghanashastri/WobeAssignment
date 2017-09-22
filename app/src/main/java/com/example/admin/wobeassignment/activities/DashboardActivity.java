@@ -57,14 +57,36 @@ public class DashboardActivity extends AppCompatActivity
             Toast.makeText(this, getResources().getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
         }
 
+        initialiseNavigationDrawer();
+    }
+
+
+    public void initialiseNavigationDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        setEmailAndNameInNavHeader(navigationView, drawer);
+    }
+
+    private void setEmailAndNameInNavHeader(NavigationView nameInNavHeader, final DrawerLayout drawer) {
+        View header = nameInNavHeader.getHeaderView(0);
+
+        TextView tvUsername = (TextView) header.findViewById(R.id.tvUsername);
+        TextView tvEmail = (TextView) header.findViewById(R.id.tvEmail);
+
+        if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null) {
+            tvUsername.setText(SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME));
+        }
+        if (SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL) != null) {
+            tvEmail.setText(SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL));
+        }
     }
 
 
