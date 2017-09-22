@@ -64,6 +64,7 @@
     <string name="ok">OK</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
+    <string name="logout_message">Are you sure you want to Logout ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="name">Name :</string>

@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/ten_10dp"
         android:layout_marginTop="@dimen/ten_10dp"
-        android:text="@string/logout"
+        android:text="@string/logout_message"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_16sp" />
 

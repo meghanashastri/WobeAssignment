@@ -11,9 +11,9 @@
         android:id="@+id/detailsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/ten_10dp"
         android:orientation="horizontal"
         android:padding="@dimen/ten_10dp"
-        android:layout_margin="@dimen/ten_10dp"
         android:weightSum="2">
 
         <TextView
@@ -67,8 +67,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="@string/verify"
                 android:background="@drawable/button_red"
+                android:text="@string/verify"
                 android:textColor="@color/google_red"
                 android:textSize="@dimen/text_size_14sp" />
 
@@ -78,24 +78,24 @@
         <EditText
             android:id="@+id/etCredits"
             style="@style/edit_text_primary"
-            android:textColor="@drawable/edit_text_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/edit_text_disable_color"
             android:enabled="false"
             android:hint="@string/credits"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@drawable/edit_text_selection"
+            android:textColorHint="@color/edit_text_disable_color" />
 
 
         <EditText
             android:id="@+id/etDescription"
             style="@style/edit_text_primary"
-            android:textColor="@drawable/edit_text_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:textColorHint="@color/edit_text_disable_color"
-            android:hint="@string/description" />
+            android:hint="@string/description"
+            android:textColor="@drawable/edit_text_selection"
+            android:textColorHint="@color/edit_text_disable_color" />
 
 
         <Button
@@ -110,7 +110,8 @@
             android:paddingLeft="@dimen/thirty_30dp"
             android:paddingRight="@dimen/thirty_30dp"
             android:paddingStart="@dimen/thirty_30dp"
-            android:text="@string/send" />
+            android:text="@string/send"
+            android:textSize="@dimen/text_size_20sp" />
 
     </LinearLayout>
 

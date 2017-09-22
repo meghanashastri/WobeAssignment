@@ -245,6 +245,7 @@ public class DashboardActivity extends AppCompatActivity
             public void onClick(View view) {
                 SharedPreferenceManager.getInstance(getApplicationContext()).clearData();
                 finish();
+                goToNextActivity(OnBoardingViewPagerActivity.class);
                 dialog.dismiss();
             }
         });
