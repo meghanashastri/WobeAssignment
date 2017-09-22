@@ -15,12 +15,10 @@
         android:id="@+id/detailsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/thirty_30dp"
         android:layout_marginEnd="@dimen/ten_10dp"
         android:layout_marginLeft="@dimen/ten_10dp"
         android:layout_marginRight="@dimen/ten_10dp"
         android:layout_marginStart="@dimen/ten_10dp"
-        android:layout_marginTop="@dimen/ten_10dp"
         android:orientation="horizontal"
         android:padding="@dimen/ten_10dp"
         android:weightSum="2">
