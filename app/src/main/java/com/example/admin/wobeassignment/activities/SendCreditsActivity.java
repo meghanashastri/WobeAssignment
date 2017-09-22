@@ -3,6 +3,7 @@ package com.example.admin.wobeassignment.activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -26,6 +27,7 @@ import com.example.admin.wobeassignment.model.BaseModel;
 import com.example.admin.wobeassignment.model.VerifyUserModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
+import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 import com.google.gson.Gson;
 
@@ -231,11 +233,16 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void showSuccessDialog() {
+
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         LayoutInflater inflater = (LayoutInflater) this.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_dialog, null);
+
+        Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
+        TextView success = (TextView) view.findViewById(R.id.success);
+        success.setTypeface(iconFont);
         Button ok = (Button) view.findViewById(R.id.btnOk);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

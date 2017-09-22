@@ -19,11 +19,15 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_16sp" />
 
-    <ImageView
-        android:layout_width="@dimen/thirty_30dp"
-        android:layout_height="@dimen/thirty_30dp"
+    <TextView
+        android:id="@+id/success"
+        android:text="@string/thumbs_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/up_arrow" />
+        android:layout_marginBottom="@dimen/twenty_20dp"
+        android:textSize="@dimen/text_size_20sp"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:id="@+id/btnOk"
