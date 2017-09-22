@@ -42,6 +42,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,14 +121,14 @@ public class DashboardActivity extends AppCompatActivity
                                 }
                                 TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
                                 if (model.getCredits() != null) {
-                                    tvBalance.setText(getResources().getString(R.string.balance)+ model.getCredits());
+                                    tvBalance.setText(getResources().getString(R.string.balance) + model.getCredits());
                                     SharedPreferenceManager.getInstance(DashboardActivity.this).
                                             saveData(Constants.CREDITS, model.getCredits());
                                 }
 
                                 if (model.getTransaction().size() > 0) {
                                     List<Integer> list = getSentAndRececivedList(model.getTransaction());
-                                    if (list.size()>0){
+                                    if (list.size() > 0) {
                                         tvAdded.setText(String.valueOf(list.get(0)));
                                         tvSent.setText(String.valueOf(list.get(1)));
                                         tvReceived.setText(String.valueOf(list.get(2)));
@@ -161,7 +162,7 @@ public class DashboardActivity extends AppCompatActivity
                 sent = sent + Integer.parseInt(transaction.get(i).getCredits().toString());
             } else if (SharedPreferenceManager.getInstance(DashboardActivity.this).getString(Constants.CUSTOMER_ID).
                     equalsIgnoreCase(transaction.get(i).getToCustomerID().toString())) {
-                if (transaction.get(i).getFromCustomerID() == null) {
+                if (transaction.get(i).getFromCustomerID().compareTo(BigInteger.valueOf(999999999)) == 0) {
                     added = added + Integer.parseInt(transaction.get(i).getCredits().toString());
                 } else {
                     received = received + Integer.parseInt(transaction.get(i).getCredits().toString());

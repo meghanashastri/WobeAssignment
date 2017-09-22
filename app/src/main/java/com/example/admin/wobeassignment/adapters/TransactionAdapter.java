@@ -14,6 +14,7 @@ import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.google_red));
             } else if (SharedPreferenceManager.getInstance(context).getString(Constants.CUSTOMER_ID).
                     equalsIgnoreCase(model.getToCustomerID().toString())) {
-                if (model.getFromCustomerID() == null) {
+                if (model.getFromCustomerID().compareTo(BigInteger.valueOf(999999999)) == 0) {
                     holder.ivTransactionImage.setText(context.getResources().getString(R.string.added_icon));
                     holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorPrimary));
                 } else {
