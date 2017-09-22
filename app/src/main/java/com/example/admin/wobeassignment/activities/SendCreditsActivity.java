@@ -43,7 +43,7 @@ import java.math.BigInteger;
 public class SendCreditsActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText etCredits, etDescription, etEmail;
     private Button btnSendCredits, tvVerify;
-    private String toCustomerId, fromCustomerId, toFirstName;
+    private String toCustomerId, fromCustomerId, toFirstName, toLastName, fromFirstName, fromLastName;
     private TextView tvName, tvBalance;
 
     @Override
@@ -141,7 +141,8 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 etDescription.setHintTextColor(getResources().getColor(R.color.colorPrimary));
                                 btnSendCredits.setEnabled(true);
                                 etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
-                                toFirstName = email;
+                                toFirstName = model.getFIRST_NAME();
+                                toLastName = model.getLAST_NAME();
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().
                                                 getString(R.string.invalid_user),
@@ -199,21 +200,19 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
 
 
     private void sendCreditsApiCall(String credits, String description) {
-        String fromFirstName, fromLastName;
-        if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null) {
+
+        if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null &&
+                SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME) != null) {
             fromFirstName = SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME);
-        } else {
-            fromFirstName = null;
+            fromLastName = SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME);
+            ;
         }
         if (SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME) != null) {
             fromLastName = SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME);
-        } else {
-            fromLastName = null;
         }
 
-
         String url = String.format(Constants.SEND_CREDITS_URL, fromCustomerId, fromFirstName, fromLastName,
-                toCustomerId, toFirstName, null, credits, description, null);
+                toCustomerId, toFirstName, toLastName, credits, description, null);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
                     @Override

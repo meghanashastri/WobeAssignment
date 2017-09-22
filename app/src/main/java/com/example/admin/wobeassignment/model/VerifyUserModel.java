@@ -11,6 +11,8 @@ public class VerifyUserModel {
     private String statusMessage;
     private String returnStatus;
     private BigInteger CUSTOMER_ID;
+    private String FIRST_NAME;
+    private String LAST_NAME;
 
     public String getStatusMessage() {
         return statusMessage;
@@ -34,5 +36,21 @@ public class VerifyUserModel {
 
     public void setCUSTOMER_ID(BigInteger CUSTOMER_ID) {
         this.CUSTOMER_ID = CUSTOMER_ID;
+    }
+
+    public String getFIRST_NAME() {
+        return FIRST_NAME;
+    }
+
+    public void setFIRST_NAME(String FIRST_NAME) {
+        this.FIRST_NAME = FIRST_NAME;
+    }
+
+    public String getLAST_NAME() {
+        return LAST_NAME;
+    }
+
+    public void setLAST_NAME(String LAST_NAME) {
+        this.LAST_NAME = LAST_NAME;
     }
 }
