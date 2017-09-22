@@ -21,7 +21,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_65dp"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size_20sp" />
+        android:textSize="@dimen/text_size_20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

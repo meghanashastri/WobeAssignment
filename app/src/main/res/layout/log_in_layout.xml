@@ -23,7 +23,8 @@
         android:layout_marginTop="@dimen/ten_10dp"
         android:text="@string/login"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size_20sp" />
+        android:textSize="@dimen/text_size_20sp"
+        android:textStyle="bold" />
 
 
     <LinearLayout
