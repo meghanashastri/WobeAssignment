@@ -28,7 +28,7 @@
         android:layout_marginBottom="@dimen/twenty_20dp"
         android:text="@string/thumbs_up"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_20sp" />
+        android:textSize="@dimen/text_size_50sp" />
 
     <Button
         android:id="@+id/btnOk"

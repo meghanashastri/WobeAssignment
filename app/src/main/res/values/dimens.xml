@@ -34,4 +34,6 @@
     <dimen name="ninteen_19sp">19sp</dimen>
     <dimen name="sixty_60dp">60dp</dimen>
     <dimen name="twenty_seven_27sp">27sp</dimen>
+    <dimen name="text_size_32sp">32sp</dimen>
+    <dimen name="text_size_50sp">50sp</dimen>
 </resources>

@@ -132,7 +132,7 @@
                     android:layout_marginLeft="@dimen/five_5dp"
                     android:layout_marginStart="@dimen/five_5dp"
                     android:text="@string/sent_icon"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/google_red"
                     android:textSize="@dimen/text_size_20sp" />
 
             </LinearLayout>
@@ -180,7 +180,7 @@
                     android:layout_marginLeft="@dimen/five_5dp"
                     android:layout_marginStart="@dimen/five_5dp"
                     android:text="@string/received_icon"
-                    android:textColor="@color/google_red"
+                    android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_size_20sp" />
 
             </LinearLayout>
