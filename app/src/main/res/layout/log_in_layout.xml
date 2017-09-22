@@ -42,7 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLength="60" />
 
 
         <EditText
@@ -51,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="50" />
 
         <Button
             android:id="@+id/btnUserLogin"

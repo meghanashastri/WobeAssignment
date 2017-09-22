@@ -29,9 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/fifteen_15dp"
             android:text="@string/register"
-            android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text_size_20sp" />
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etFirstname"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/first_name"
-            android:maxLines="1" />
+            android:maxLength="50" />
 
         <EditText
             android:id="@+id/etLastname"
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/last_name"
-            android:maxLines="1" />
+            android:maxLength="50" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -55,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLength="60" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -63,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="50" />
 
         <Button
             android:id="@+id/btnRegister"

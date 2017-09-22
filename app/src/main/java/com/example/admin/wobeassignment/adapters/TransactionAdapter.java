@@ -77,20 +77,20 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 if (model.getFromCustomerID().compareTo(BigInteger.valueOf(999999999)) == 0) {
                     holder.ivTransactionImage.setText(context.getResources().getString(R.string.added_icon));
                     holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorPrimary));
-                    if (model.getToFirstName() != null && model.getToLastName() != null) {
+                    if (model.getFromFirstName() != null && model.getFromLastName() != null) {
                         holder.tvTransactionName.setText(model.getFromFirstName() + " " + model.getFromLastName());
-                    } else if (model.getToFirstName() != null) {
-                        holder.tvTransactionName.setText(model.getFromLastName());
+                    } else if (model.getFromFirstName() != null) {
+                        holder.tvTransactionName.setText(model.getFromFirstName());
                     } else {
                         holder.tvTransactionName.setVisibility(View.GONE);
                     }
                 } else {
                     holder.ivTransactionImage.setText(context.getResources().getString(R.string.received_icon));
                     holder.ivTransactionImage.setTextColor(context.getResources().getColor(R.color.colorAccent));
-                    if (model.getToFirstName() != null && model.getToLastName() != null) {
-                        holder.tvTransactionName.setText(model.getToFirstName() + " " + model.getToLastName());
-                    } else if (model.getToFirstName() != null) {
-                        holder.tvTransactionName.setText(model.getFromLastName());
+                    if (model.getFromFirstName() != null && model.getFromLastName() != null) {
+                        holder.tvTransactionName.setText(model.getFromFirstName() + " " + model.getFromLastName());
+                    } else if (model.getFromFirstName() != null) {
+                        holder.tvTransactionName.setText(model.getFromFirstName());
                     } else {
                         holder.tvTransactionName.setVisibility(View.GONE);
                     }
