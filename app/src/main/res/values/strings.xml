@@ -71,5 +71,6 @@
     <string name="email_is">Email :</string>
     <string name="balance">Balance: </string>
     <string name="cannot_send_credits">Sender and receiver email address cannot be the same</string>
+    <string name="enter_valid_email">Enter valid email address</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -222,14 +223,24 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             String password = etPassword.getText().toString().trim();
             String tokenId = "1234567890";
 
-            //register api call
-            if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
-                makeApiCall(firstName, lastName, email, password, tokenId);
+            if (isValidEmail(email)) {
+                //register api call
+                if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+                    makeApiCall(firstName, lastName, email, password, tokenId);
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                            Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.enter_valid_email), Toast.LENGTH_SHORT).show();
             }
+
+
         }
+    }
+
+    private final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
 
