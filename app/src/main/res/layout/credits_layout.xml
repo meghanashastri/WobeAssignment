@@ -62,8 +62,8 @@
 
             <Button
                 android:id="@+id/tvVerify"
-                android:layout_width="@dimen/seventy_70dp"
-                android:layout_height="@dimen/thirty_30dp"
+                android:layout_width="@dimen/margin_65dp"
+                android:layout_height="@dimen/twenty_20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"

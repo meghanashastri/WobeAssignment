@@ -7,6 +7,6 @@
         android:startColor="@android:color/transparent" />
     <corners android:radius="0dp" />
     <stroke
-        android:width="5px"
+        android:width="1px"
         android:color="@color/google_red" />
 </shape>
