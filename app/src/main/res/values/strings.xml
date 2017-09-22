@@ -46,12 +46,12 @@
     <string name="facebook_icon">&#xf082;</string>
     <string name="google_icon">&#xf0d4;</string>
     <string name="send_credits">Send Credits</string>
-    <string name="recent_transactions">Recent Transactions</string>
+    <string name="recent_transactions">Transactions</string>
     <string name="to_email">To Email</string>
     <string name="description">Description</string>
     <string name="credits">Credits</string>
     <string name="verify">Verify</string>
-    <string name="invalid_user">Invalid User</string>
+    <string name="invalid_user">Invalid Recipient</string>
     <string name="send">Send</string>
     <string name="enter_cedits">Enter Credits</string>
     <string name="enter_description">Enter Description</string>

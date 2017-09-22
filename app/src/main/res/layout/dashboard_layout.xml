@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/transperant_background_image"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.admin.wobeassignment.activities.DashboardActivity"
     tools:showIn="@layout/app_bar_main">
@@ -15,10 +14,10 @@
         android:id="@+id/detailsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/ten_10dp"
-        android:layout_marginLeft="@dimen/ten_10dp"
-        android:layout_marginRight="@dimen/ten_10dp"
-        android:layout_marginStart="@dimen/ten_10dp"
+        android:layout_marginEnd="@dimen/zero_0dp"
+        android:layout_marginLeft="@dimen/zero_0dp"
+        android:layout_marginRight="@dimen/zero_0dp"
+        android:layout_marginStart="@dimen/zero_0dp"
         android:orientation="horizontal"
         android:padding="@dimen/ten_10dp"
         android:weightSum="2">
@@ -30,6 +29,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="Rohith"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_18sp" />
 
@@ -40,6 +40,7 @@
             android:layout_gravity="end"
             android:layout_weight="1"
             android:gravity="end"
+            android:text="vfvervetgb"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_18sp" />
 
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/detailsLayout"
+        android:layout_marginTop="@dimen/forty_five_45dp"
         android:background="@color/credits_layout_color"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/ten_10dp"
@@ -74,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/added"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -121,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sent"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -170,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/received"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -204,7 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/creditDetailsLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/thirty_30dp"
+        android:layout_marginTop="@dimen/forty_five_45dp"
         android:background="@drawable/button_primary_selector"
         android:paddingEnd="@dimen/thirty_30dp"
         android:paddingLeft="@dimen/thirty_30dp"
@@ -220,12 +222,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnSendCredits"
-        android:layout_marginTop="@dimen/fifty_50dp"
-        android:textStyle="bold"
+        android:layout_marginTop="@dimen/thirty_30dp"
         android:padding="@dimen/ten_10dp"
         android:text="@string/recent_transactions"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_20sp" />
+        android:textSize="@dimen/text_size_20sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvRecentTransactions"

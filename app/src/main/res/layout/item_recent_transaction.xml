@@ -37,11 +37,11 @@
             android:layout_alignParentStart="true"
             android:layout_below="@id/tvTransactionTimestamp"
             android:layout_marginEnd="@dimen/ten_10dp"
-            android:layout_marginLeft="@dimen/twenty_20dp"
+            android:layout_marginLeft="@dimen/ten_10dp"
             android:layout_marginRight="@dimen/ten_10dp"
-            android:layout_marginStart="@dimen/twenty_20dp"
+            android:layout_marginStart="@dimen/ten_10dp"
             android:layout_marginTop="@dimen/ten_10dp"
-            android:textSize="@dimen/text_size_24sp" />
+            android:textSize="27sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_12sp" />
+                android:textSize="@dimen/text_size_12sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
