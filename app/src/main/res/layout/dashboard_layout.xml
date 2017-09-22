@@ -29,7 +29,6 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Rohith"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_18sp" />
 
@@ -40,7 +39,6 @@
             android:layout_gravity="end"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="vfvervetgb"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_18sp" />
 
@@ -76,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/added"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="19sp"
+                    android:textSize="@dimen/ninteen_19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -123,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sent"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="19sp"
+                    android:textSize="@dimen/ninteen_19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -172,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/received"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="19sp"
+                    android:textSize="@dimen/ninteen_19sp"
                     android:textStyle="bold" />
 
                 <TextView
