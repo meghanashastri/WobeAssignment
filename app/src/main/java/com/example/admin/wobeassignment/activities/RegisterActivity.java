@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private Button fb, btnRegister;
-    private TextInputEditText etFirstName, etLastName, etEmail, etPassword;
+    private EditText etFirstName, etLastName, etEmail, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,10 +199,10 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private void initialiseViews() {
         Button btnGoogleSignUp = (Button) findViewById(R.id.btnGoogleSignUp);
         btnGoogleSignUp.setOnClickListener(this);
-        etFirstName = (TextInputEditText) findViewById(R.id.etFirstname);
-        etLastName = (TextInputEditText) findViewById(R.id.etLastname);
-        etEmail = (TextInputEditText) findViewById(R.id.etEmail);
-        etPassword = (TextInputEditText) findViewById(R.id.etPassword);
+        etFirstName = (EditText) findViewById(R.id.etFirstname);
+        etLastName = (EditText) findViewById(R.id.etLastname);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
     }

@@ -35,37 +35,22 @@
         android:layout_marginRight="@dimen/fifty_50dp"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/etEmail"
+            style="@style/edit_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            app:hintTextAppearance="@style/MyAppearance">
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_14sp" />
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/etPassword"
+            style="@style/edit_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            app:hintTextAppearance="@style/MyAppearance">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_14sp" />
-        </android.support.design.widget.TextInputLayout>
+            android:hint="@string/password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnUserLogin"

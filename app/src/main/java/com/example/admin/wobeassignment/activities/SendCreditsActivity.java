@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,7 @@ import java.math.BigInteger;
 
 public class SendCreditsActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tvVerify;
-    private TextInputEditText etCredits, etDescription, etEmail;
+    private EditText etCredits, etDescription, etEmail;
     private Button btnSendCredits;
     private String toCustomerId, fromCustomerId, toFirstName;
 
@@ -53,11 +54,11 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void initialiseViews() {
-        etEmail = (TextInputEditText) findViewById(R.id.etEmail);
+        etEmail = (EditText) findViewById(R.id.etEmail);
         tvVerify = (TextView) findViewById(R.id.tvVerify);
         tvVerify.setOnClickListener(this);
-        etCredits = (TextInputEditText) findViewById(R.id.etCredits);
-        etDescription = (TextInputEditText) findViewById(R.id.etDescription);
+        etCredits = (EditText) findViewById(R.id.etCredits);
+        etDescription = (EditText) findViewById(R.id.etDescription);
         btnSendCredits = (Button) findViewById(R.id.btnSend);
         btnSendCredits.setOnClickListener(this);
     }

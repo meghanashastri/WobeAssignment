@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private TextInputEditText etEmail, etPassword;
+    private EditText etEmail, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,8 +196,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private void initialiseViews() {
         Button btnGoogleSignIn = (Button) findViewById(R.id.btnGoogleSignIn);
         btnGoogleSignIn.setOnClickListener(this);
-        etEmail = (TextInputEditText) findViewById(R.id.etEmail);
-        etPassword = (TextInputEditText) findViewById(R.id.etPassword);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
         Button btnLogin = (Button) findViewById(R.id.btnUserLogin);
         btnLogin.setOnClickListener(this);
     }
