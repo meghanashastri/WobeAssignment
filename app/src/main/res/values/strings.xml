@@ -37,7 +37,7 @@
     <string name="invalid_credentials">Invalid Credentials</string>
     <string name="error_message">Something went wrong</string>
     <string name="added">ADDED</string>
-    <string name="added_icon">&#xf155;</string>
+    <string name="added_icon">&#xf055;</string>
     <string name="sent">SENT</string>
     <string name="sent_icon">&#xf01b;</string>
     <string name="received">RECEIVED</string>
