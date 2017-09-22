@@ -265,7 +265,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.CUSTOMER_ID, customerId);
                                 goToNextActivity(PasscodeActivity.class);
-                                Toast.makeText(LoginActivity.this, customerId, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalid_credentials),
                                         Toast.LENGTH_SHORT).show();
