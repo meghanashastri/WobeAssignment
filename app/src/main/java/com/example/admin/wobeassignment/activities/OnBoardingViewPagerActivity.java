@@ -25,13 +25,19 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
     private OnBoardingViewPagerActivityAdapter pagerAdapter;
     private LinearLayout dotsLayout;
     private ImageView[] ivArrayDotsPager;
+    static OnBoardingViewPagerActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.activity_onboarding_view_pager);
 
         initialiseViews();
+    }
+
+    public static OnBoardingViewPagerActivity getInstance() {
+        return activity;
     }
 
     private void initialiseViews() {

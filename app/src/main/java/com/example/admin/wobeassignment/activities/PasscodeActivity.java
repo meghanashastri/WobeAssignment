@@ -92,14 +92,17 @@ public class PasscodeActivity extends AppCompatActivity {
                     } else if (passcodeBundle.equalsIgnoreCase("2")) {
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+                        OnBoardingViewPagerActivity.getInstance().finish();
                         goToNextActivity(DashboardActivity.class);
                     } else if (passcodeBundle.equalsIgnoreCase("3")) {
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+                        OnBoardingViewPagerActivity.getInstance().finish();
                         goToNextActivity(DashboardActivity.class);
                     } else if (passcodeBundle.equalsIgnoreCase("4")) {
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).setFirstTimeLaunch(true);
                         SharedPreferenceManager.getInstance(PasscodeActivity.this).saveData(Constants.PASSCODE, passcode);
+                        OnBoardingViewPagerActivity.getInstance().finish();
                         goToNextActivity(DashboardActivity.class);
                     }
                 }
