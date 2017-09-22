@@ -170,7 +170,6 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                 SharedPreferenceManager.getInstance(RegisterActivity.this).
                                         saveData(Constants.CUSTOMER_ID, customerId);
                                 goToNextActivity(PasscodeActivity.class);
-                                Toast.makeText(RegisterActivity.this, customerId, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

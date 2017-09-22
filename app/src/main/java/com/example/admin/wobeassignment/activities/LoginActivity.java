@@ -167,7 +167,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 SharedPreferenceManager.getInstance(LoginActivity.this).
                                         saveData(Constants.CUSTOMER_ID, customerId);
                                 goToNextActivity(PasscodeActivity.class);
-                                Toast.makeText(LoginActivity.this, customerId, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

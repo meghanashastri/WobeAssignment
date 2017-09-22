@@ -169,7 +169,6 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(context).saveData(Constants.CUSTOMER_ID, customerId);
                                 goToNextActivity(PasscodeActivity.class);
-                                Toast.makeText(getActivity(), customerId, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
