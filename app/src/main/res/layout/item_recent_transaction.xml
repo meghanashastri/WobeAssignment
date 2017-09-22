@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_16sp" />
+            android:textSize="@dimen/text_size_12sp" />
 
         <TextView
             android:id="@+id/tvCredits"
@@ -25,7 +25,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/ten_10dp"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_17sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/ivTransactionImage"
@@ -33,13 +35,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="@dimen/text_size_24sp"
             android:layout_below="@id/tvTransactionTimestamp"
+            android:layout_marginEnd="@dimen/ten_10dp"
             android:layout_marginLeft="@dimen/twenty_20dp"
             android:layout_marginRight="@dimen/ten_10dp"
-            android:layout_marginEnd="@dimen/ten_10dp"
             android:layout_marginStart="@dimen/twenty_20dp"
-            android:layout_marginTop="@dimen/ten_10dp" />
+            android:layout_marginTop="@dimen/ten_10dp"
+            android:textSize="@dimen/text_size_24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_17sp" />
 
             <TextView
                 android:id="@+id/tvTransactionDescription"

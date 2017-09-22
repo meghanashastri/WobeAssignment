@@ -74,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/added"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_20sp" />
+                    android:textSize="@dimen/text_size_20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/iconAdded"
@@ -120,7 +121,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sent"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_20sp" />
+                    android:textSize="@dimen/text_size_20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/iconSent"
@@ -168,7 +170,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/received"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_20sp" />
+                    android:textSize="@dimen/text_size_20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/iconReceived"
@@ -218,10 +221,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btnSendCredits"
         android:layout_marginTop="@dimen/fifty_50dp"
+        android:textStyle="bold"
         android:padding="@dimen/ten_10dp"
         android:text="@string/recent_transactions"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_18sp" />
+        android:textSize="@dimen/text_size_20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvRecentTransactions"
