@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/thirty_30dp"
-            android:background="@drawable/button_primary_color"
+            android:background="@drawable/button_primary_selector"
             android:enabled="false"
             android:paddingEnd="@dimen/thirty_30dp"
             android:paddingLeft="@dimen/thirty_30dp"

@@ -146,7 +146,7 @@
         android:layout_below="@id/creditDetailsLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/thirty_30dp"
-        android:background="@drawable/button_primary_color"
+        android:background="@drawable/button_primary_selector"
         android:paddingEnd="@dimen/thirty_30dp"
         android:paddingLeft="@dimen/thirty_30dp"
         android:paddingRight="@dimen/thirty_30dp"
