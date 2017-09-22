@@ -136,7 +136,9 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 tvVerify.setVisibility(View.GONE);
                                 etEmail.setEnabled(false);
                                 etCredits.setEnabled(true);
+                                etCredits.setHintTextColor(getResources().getColor(R.color.colorPrimary));
                                 etDescription.setEnabled(true);
+                                etDescription.setHintTextColor(getResources().getColor(R.color.colorPrimary));
                                 btnSendCredits.setEnabled(true);
                                 toFirstName = email;
                             } else {

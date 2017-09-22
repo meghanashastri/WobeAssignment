@@ -78,8 +78,10 @@
         <EditText
             android:id="@+id/etCredits"
             style="@style/edit_text_primary"
+            android:textColor="@drawable/edit_text_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/edit_text_disable_color"
             android:enabled="false"
             android:hint="@string/credits"
             android:inputType="number" />
@@ -88,9 +90,11 @@
         <EditText
             android:id="@+id/etDescription"
             style="@style/edit_text_primary"
+            android:textColor="@drawable/edit_text_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
+            android:textColorHint="@color/edit_text_disable_color"
             android:hint="@string/description" />
 
 
