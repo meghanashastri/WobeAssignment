@@ -157,7 +157,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
-    private void makeApiCallForFacebookLogin(String firstName, String lastName, String email, String tokenId) {
+    private void makeApiCallForFacebookLogin(final String firstName, final String lastName, String email, String tokenId) {
         String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
@@ -170,6 +170,10 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(RegisterActivity.this).
                                         saveData(Constants.CUSTOMER_ID, customerId);
+                                SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                        saveData(Constants.FIRST_NAME, firstName);
+                                SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                        saveData(Constants.LAST_NAME, lastName);
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {
@@ -281,7 +285,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
-    private void makeApiCall(final String firstName, String lastName, final String email, String password, String tokenId) {
+    private void makeApiCall(final String firstName, final String lastName, final String email, String password, String tokenId) {
         String url = String.format(Constants.Register_URL, firstName, lastName, email, password, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
@@ -292,9 +296,14 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
-                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.USERNAME, firstName);
-                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.EMAIL, email);
-                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.CUSTOMER_ID, customerId);
+                                SharedPreferenceManager.getInstance(getApplicationContext()).
+                                        saveData(Constants.FIRST_NAME, firstName);
+                                SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                        saveData(Constants.LAST_NAME, lastName);
+                                SharedPreferenceManager.getInstance(getApplicationContext()).
+                                        saveData(Constants.EMAIL, email);
+                                SharedPreferenceManager.getInstance(getApplicationContext()).
+                                        saveData(Constants.CUSTOMER_ID, customerId);
                                 goToNextActivity(PasscodeActivity.class);
                             } else {
                                 Toast.makeText(RegisterActivity.this, getResources().getString(R.string.existing_user),

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.utilities.Constants;
@@ -39,17 +40,23 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        if (SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME) != null &&
-                SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.LAST_NAME) != null) {
-            tvName.setText(SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME +
-                    SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.LAST_NAME)));
-        }else if (SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME) != null){
-            tvName.setText(SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.FIRST_NAME));
+        if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null &&
+                SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME) != null) {
+
+            String firstname = SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME);
+            String lastname = SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME);
+
+
+            tvName.setText(firstname + " " + lastname);
+
+        }else if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null){
+            tvName.setText(SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME));
         }
 
-        if (SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.EMAIL) != null) {
-            tvEmail.setText(SharedPreferenceManager.getInstance(ProfileActivity.this).getString(Constants.EMAIL));
+        if (SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL) != null) {
+            tvEmail.setText(SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL));
         }
+
     }
 
     @Override

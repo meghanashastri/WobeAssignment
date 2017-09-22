@@ -156,7 +156,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         }
     }
 
-    private void makeApiCall(String firstName, String lastName, String email, String tokenId) {
+    private void makeApiCall(final String firstName, final String lastName, String email, String tokenId) {
         String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
@@ -167,7 +167,12 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
-                                SharedPreferenceManager.getInstance(context).saveData(Constants.CUSTOMER_ID, customerId);
+                                SharedPreferenceManager.getInstance(context).saveData(Constants.CUSTOMER_ID,
+                                        customerId);
+                                SharedPreferenceManager.getInstance(context).saveData(Constants.FIRST_NAME,
+                                        firstName);
+                                SharedPreferenceManager.getInstance(context).saveData(Constants.LAST_NAME,
+                                        lastName);
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {

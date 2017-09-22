@@ -154,7 +154,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
 
-    private void makeApiCallForFacebookLogin(String firstName, String lastName, String email, String tokenId) {
+    private void makeApiCallForFacebookLogin(final String firstName, final String lastName, String email, String tokenId) {
         String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
@@ -167,6 +167,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(LoginActivity.this).
                                         saveData(Constants.CUSTOMER_ID, customerId);
+                                SharedPreferenceManager.getInstance(LoginActivity.this).
+                                        saveData(Constants.FIRST_NAME, firstName);
+                                SharedPreferenceManager.getInstance(LoginActivity.this).
+                                        saveData(Constants.LAST_NAME, lastName);
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {
@@ -276,7 +280,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
-                                SharedPreferenceManager.getInstance(getApplicationContext()).saveData(Constants.CUSTOMER_ID, customerId);
+                                SharedPreferenceManager.getInstance(getApplicationContext()).
+                                        saveData(Constants.CUSTOMER_ID, customerId);
                                 goToNextActivity(PasscodeActivity.class);
                             } else {
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalid_credentials),
