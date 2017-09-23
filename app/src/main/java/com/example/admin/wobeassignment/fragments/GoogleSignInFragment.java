@@ -18,8 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.admin.wobeassignment.ApplicationLoader;
 import com.example.admin.wobeassignment.R;
-import com.example.admin.wobeassignment.activities.DashboardActivity;
-import com.example.admin.wobeassignment.activities.LoginActivity;
 import com.example.admin.wobeassignment.activities.PasscodeActivity;
 import com.example.admin.wobeassignment.model.BaseModel;
 import com.example.admin.wobeassignment.utilities.CommonUtils;
@@ -30,7 +28,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 
@@ -85,6 +82,9 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
     }
 
 
+    /*
+      Method to build the GoogleApiClient
+     */
     private void googleSignIn() {
         try {
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.
@@ -104,6 +104,9 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         }
     }
 
+    /*
+      Method to enable Google Sign In, where google show their fragment to sign in
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -112,6 +115,9 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        /*
+          Google sends back result
+         */
         if (resultCode == getActivity().RESULT_OK) {
             if (requestCode == RC_SIGN_IN) {
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -120,6 +126,13 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         }
     }
 
+    /*
+      Method to handle result sent by Google.
+
+      On Success, retrieve email and name.
+      Save email and name in Shared Preference.
+      Make Social Login API call
+     */
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -144,6 +157,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             SharedPreferenceManager.getInstance(context).saveData(Constants.USERNAME, userName);
             SharedPreferenceManager.getInstance(context).saveData(Constants.EMAIL, email);
             if (CommonUtils.isConnectingToInternet(getActivity())) {
+                //make Social Login API call
                 makeApiCall(firstName, lastName, email, "123445555");
             } else {
                 Toast.makeText(context, getResources().getString(R.string.check_internet_connection),
@@ -156,6 +170,11 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         }
     }
 
+    /*
+      Method to make social login API call
+      Request parameters - firstname, lastname, email, tokenid
+      Success response - customerid
+     */
     private void makeApiCall(final String firstName, final String lastName, String email, String tokenId) {
         String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
@@ -187,7 +206,9 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
-
+    /*
+      Method to go to next activity
+     */
     protected void goToNextActivity(Class nextActivity) {
         Intent intent = new Intent();
         intent.setClass(getContext(), nextActivity);
