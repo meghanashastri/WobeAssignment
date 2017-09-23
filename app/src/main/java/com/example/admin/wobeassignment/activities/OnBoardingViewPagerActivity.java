@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.adapters.OnBoardingViewPagerActivityAdapter;
 
-import java.util.ArrayList;
 
 /**
  * Created by Admin on 19-09-2017.
@@ -36,10 +35,16 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
         initialiseViews();
     }
 
+    /*
+      Method to return instance of this activity
+    */
     public static OnBoardingViewPagerActivity getInstance() {
         return activity;
     }
 
+    /*
+      Method to initialise viewsand view pager
+    */
     private void initialiseViews() {
         dotsLayout = (LinearLayout) findViewById(R.id.dotsLayout);
 
@@ -57,11 +62,14 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
         btnRegister.setOnClickListener(this);
     }
 
+    /*
+      Method to set scroll listeners for the custom dotted progress bar on the view pager
+       in the Onboarding screen
+    */
     private void setViewPagerScroll() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -80,6 +88,9 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
 
     }
 
+    /*
+      Method to set the number of dots in the custom progress dot bar in view pager and set the color
+    */
     private void setupPagerIndidcatorDots() {
         ivArrayDotsPager = new ImageView[3];
         for (int i = 0; i < ivArrayDotsPager.length; i++) {
@@ -100,6 +111,9 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
         }
     }
 
+    /*
+      Method to handle click listeners of views
+   */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -113,6 +127,9 @@ public class OnBoardingViewPagerActivity extends FragmentActivity implements Vie
         }
     }
 
+    /*
+      Method to go to next activity
+    */
     protected void goToNextActivity(Class nextActivity) {
         Intent intent = new Intent();
         intent.setClass(this, nextActivity);
