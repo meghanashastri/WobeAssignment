@@ -2,7 +2,6 @@ package com.example.admin.wobeassignment.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -60,6 +59,13 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
         setContentView(R.layout.activity_register);
 
+         /*
+           Facebook Login integration.
+           Email permissions asked to use the customer email.
+           On successful facebook login, name and email is retrieved.
+           API call for Social Login is done, to save details in the server database.
+           Facebook Logout is done.
+         */
         fb = (Button) findViewById(R.id.btnFacebookSignUp);
         loginButton = (LoginButton) findViewById(R.id.login_button);
         fb.setOnClickListener(this);
@@ -70,30 +76,31 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-
                         Log.d("success", "Success");
-
                         String accessToken = loginResult.getAccessToken()
                                 .getToken();
                         Log.i("accessToken", accessToken);
-
                         GraphRequest request = GraphRequest.newMeRequest(
                                 loginResult.getAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
                                     @Override
                                     public void onCompleted(JSONObject object,
                                                             GraphResponse response) {
-
                                         Log.i("LoginActivity",
                                                 response.toString());
                                         try {
+                                             /*
+                                               Name and Email is retrieved from Facebook success response
+                                            */
                                             String name = object.getString("name");
                                             String email = object.getString("email");
                                             String facebookId = object.getString("id");
 
-
                                             String firstName = null, lastName = null;
 
+                                              /*
+                                               Name is split to Firstname and Lastname
+                                            */
                                             if (name != null) {
                                                 String[] parts = name.split("\\s+");
                                                 if (parts.length == 1) {
@@ -105,12 +112,18 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                                 }
                                             }
 
+                                             /*
+                                              Firstname and Lastname saved in Shared Preference
+                                             */
                                             SharedPreferenceManager.getInstance(RegisterActivity.this).
                                                     saveData(Constants.USERNAME, name);
                                             SharedPreferenceManager.getInstance(RegisterActivity.this).
                                                     saveData(Constants.EMAIL, email);
                                             if (facebookId != null && !facebookId.isEmpty() && name != null
                                                     && !name.isEmpty() && email != null && !email.isEmpty()) {
+                                                 /*
+                                                   API call for Social Login
+                                                */
                                                 if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
                                                     makeApiCallForFacebookLogin(firstName, lastName,
                                                             email, "123445555");
@@ -142,13 +155,15 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                     public void onError(FacebookException exception) {
                         Toast.makeText(RegisterActivity.this, getResources().getString(R.string.error_message),
                                 Toast.LENGTH_SHORT).show();
-
                     }
                 });
 
         initialiseViews();
     }
 
+    /*
+      Method for Facebook Logout
+    */
     private void facebookLogOut() {
         try {
             LoginManager.getInstance().logOut();
@@ -157,6 +172,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
+    /*
+      Method for Social Login API call
+      Request parameters - firstname, lastname, email, tokenid
+      Successful response - customerid
+    */
     private void makeApiCallForFacebookLogin(final String firstName, final String lastName, String email, String tokenId) {
         String url = String.format(Constants.SOCIAL_LOGIN_URL, firstName, lastName, email, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
@@ -165,6 +185,10 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                     public void onResponse(JSONObject response) {
                         try {
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                 /*
+                                  On success response from API, customerid, name and email is stored
+                                  in Shared Preference and taken to the Passcode Activity
+                                */
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
                                 String customerId = model.getCustomerID().toString();
@@ -192,6 +216,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //Result code received from Facebook
         if (resultCode == RESULT_OK) {
             if (requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()) {
                 callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -199,7 +224,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
-
+    /*
+    Method to initialise views
+   */
     private void initialiseViews() {
         Button btnGoogleSignUp = (Button) findViewById(R.id.btnGoogleSignUp);
         btnGoogleSignUp.setOnClickListener(this);
@@ -211,6 +238,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         btnRegister.setOnClickListener(this);
     }
 
+    /*
+      Method to validate firstname, lastname, email and password
+     */
     private void validation() {
         if (!(etFirstName.getText().toString().trim().length() > 0)) {
             Toast.makeText(this, getResources().getText(R.string.enter_first_name), Toast.LENGTH_SHORT).show();
@@ -230,8 +260,8 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
             if (firstName.length() >= 4) {
                 if (isValidEmail(email)) {
                     if (password.length() >= 6) {
-                        //register api call
                         if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+                            //register api call
                             makeApiCall(firstName, lastName, email, password, tokenId);
                         } else {
                             Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
@@ -249,11 +279,15 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
+    //Method for email validation
     private final static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
 
+    /*
+      Method to add fragment
+    */
     private void addFragment() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -262,6 +296,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         fragmentTransaction.commit();
     }
 
+    /*
+      Method to handle click listeners of views
+   */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -285,6 +322,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         }
     }
 
+    /*
+     Method for Register API call.
+     Request parameters - firstname, lastname, email, password and tokenid.
+     Successful Response - customerid
+   */
     private void makeApiCall(final String firstName, final String lastName, final String email, String password, String tokenId) {
         String url = String.format(Constants.Register_URL, firstName, lastName, email, password, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
@@ -321,6 +363,9 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
+    /*
+      Method to go to next activity
+    */
     protected void goToNextActivity(Class nextActivity) {
         Intent intent = new Intent();
         intent.setClass(this, nextActivity);
