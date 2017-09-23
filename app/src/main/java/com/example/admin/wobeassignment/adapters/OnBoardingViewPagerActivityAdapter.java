@@ -8,10 +8,10 @@ import com.example.admin.wobeassignment.fragments.HelperOneFragment;
 import com.example.admin.wobeassignment.fragments.HelperTwoFragment;
 import com.example.admin.wobeassignment.fragments.HelperThreeFragment;
 
-/**
- * Created by Admin on 19-09-2017.
- */
 
+/*
+   Adapter to set the correct fragment on swiping the view pager.
+*/
 public class OnBoardingViewPagerActivityAdapter extends FragmentPagerAdapter {
     public static final int PAGE_COUNT = 3;
     private final int FRAGMENT_HELPER_ONE = 0;
