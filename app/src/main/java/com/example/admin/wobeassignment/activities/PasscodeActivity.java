@@ -35,6 +35,11 @@ public class PasscodeActivity extends AppCompatActivity {
         setPasscodeTitle();
     }
 
+    /*
+      Method to set title of Passcode Activity
+      If customer is from Login/Register screen, then Set Passcode
+      else Enter Passcode
+    */
     private void setPasscodeTitle() {
         if (passcodeBundle != null) {
             if (passcodeBundle.equalsIgnoreCase(Constants.VALUE_SPLASH_SCREEN_ACTIVITY)) {
@@ -49,6 +54,9 @@ public class PasscodeActivity extends AppCompatActivity {
         }
     }
 
+    /*
+      Method to initialise views
+    */
     private void initialiseViews() {
         etOne = (EditText) findViewById(R.id.etOne);
         etOne.requestFocus();
@@ -62,9 +70,12 @@ public class PasscodeActivity extends AppCompatActivity {
         tvPasscode = (TextView) findViewById(R.id.tvPasscode);
     }
 
+    /*
+      Textwatcher is added to the views to enter the passcode.
+      On entering the digits in the views, the focus is shown on the next view to enter the digit
+    */
     private final TextWatcher passcodeEntered = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -83,13 +94,19 @@ public class PasscodeActivity extends AppCompatActivity {
         }
     };
 
+    /*
+      Textwatcher is added to the views to enter the passcode.
+      On entering the last digit of the passcode,
+
+      If the customer is from Login/Register screen,
+          the entered passcode is saved in the Shared Preference.
+      else the entered passcode is validated with the passcode in Shared Preference.
+    */
     private final TextWatcher passcodeCheck = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
         }
 
         public void afterTextChanged(Editable s) {
@@ -128,6 +145,9 @@ public class PasscodeActivity extends AppCompatActivity {
         }
     };
 
+    /*
+      Method to go to next activity
+    */
     protected void goToNextActivity(Class nextActivity) {
         Intent intent = new Intent();
         intent.setClass(this, nextActivity);
