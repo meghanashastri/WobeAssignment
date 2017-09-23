@@ -15,16 +15,14 @@ import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 
 import java.math.BigInteger;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-/**
- * Created by Admin on 21-09-2017.
- */
-
+/*
+   Adapter to set the transaction list obtained as response from the dashboard API to the recycler view
+*/
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
     private Context context;
     private List<TransactionModel> transactionModelList;
@@ -52,6 +50,20 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         holder.ivTransactionImage.setTypeface(iconFont);
 
+        /*
+          Data from the list is shown in the screen
+
+           If the fromCustomerId received from the JSON response = customerId saved in Shared Preference,
+           then the credits is a sent value. Icon and receiver details are shown
+
+           If the toCustomerId received from the JSON response = customerId saved in Shared Preference,
+            then the credits is a received value
+
+            The received value can be either from WOBE(10000 credits on regitration) or any other customer
+            So, if the fromCustomerId = 999999999(WOBE customerId), then the credits is an added value
+            else it is a received value. Icon and sender value is shown
+
+         */
         if (model != null) {
 
             if (model.getTransactionDate() != null) {
@@ -59,7 +71,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             } else {
                 holder.tvTransactionTimestamp.setVisibility(View.GONE);
             }
-
 
             if (SharedPreferenceManager.getInstance(context).getString(Constants.CUSTOMER_ID).
                     equalsIgnoreCase(model.getFromCustomerID().toString())) {
@@ -96,7 +107,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                     }
                 }
             }
-
 
             if (model.getCredits().toString() != null) {
                 holder.tvCredits.setText(model.getCredits().toString());
