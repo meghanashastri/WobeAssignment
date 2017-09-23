@@ -55,6 +55,9 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         fromCustomerId = SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID);
     }
 
+    /*
+      Method to initialise views
+    */
     private void initialiseViews() {
         etEmail = (EditText) findViewById(R.id.etEmail);
         tvVerify = (Button) findViewById(R.id.tvVerify);
@@ -74,10 +77,11 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
             tvBalance.setText(getResources().getString(R.string.balance) + SharedPreferenceManager.
                     getInstance(SendCreditsActivity.this).getString(Constants.CREDITS));
         }
-
-
     }
 
+    /*
+      Method to initialise toolbar and set title
+    */
     private void initialiseToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,6 +89,9 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    /*
+      Method to handle back arrow click from toolbar
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
@@ -94,6 +101,9 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+      Method to handle click listeners of views
+    */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -122,6 +132,11 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /*
+      Method for User validation API call.
+      Request parameters - email.
+      Successful response - toCustomerId, toFirstName, toLastname
+    */
     private void verifyUserApiCall(final String email) {
         String url = String.format(Constants.VERIFY_USER_URL, email);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
@@ -160,6 +175,9 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
+    /*
+      Method for credits entered and description entered validation
+    */
     private void sendCreditsValidation() {
         if (!(etCredits.getText().toString().trim().length() > 0)) {
             Toast.makeText(this, getResources().getText(R.string.enter_cedits), Toast.LENGTH_SHORT).show();
@@ -170,14 +188,16 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /*
+      Method to check credit balance with the entered credits.
+      If entered credit <= the credit balance, then Send Credits API call is done.
+      else, customer is indicated that the balance is insufficient
+     */
     private void checkCreditBalance(String credits) {
-
         BigInteger toCredits = BigInteger.valueOf(Long.valueOf(credits));
         BigInteger userCredits = BigInteger.valueOf(Long.valueOf(SharedPreferenceManager.
                 getInstance(this).getString(Constants.CREDITS)));
-
         int availableCredits = userCredits.compareTo(toCredits);
-
         if (availableCredits == 0) {
             if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
                 btnSendCredits.setEnabled(false);
@@ -201,13 +221,19 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    private void sendCreditsApiCall(String credits, String description) {
+    /*
+       Method to make Send Credits API call.
 
+       Request parameters - fromCustomerId, fromFirstname, fromLastname,
+       toCustomerId, toFirstname, toLastname, credits, description, noteToSelf
+
+       Successful response - Success Message
+    */
+    private void sendCreditsApiCall(String credits, String description) {
         if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null &&
                 SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME) != null) {
             fromFirstName = SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME);
             fromLastName = SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME);
-            ;
         }
         if (SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME) != null) {
             fromLastName = SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME);
@@ -242,14 +268,15 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
+    /*
+       Method to show success dialog
+    */
     private void showSuccessDialog() {
-
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         LayoutInflater inflater = (LayoutInflater) this.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_dialog, null);
-
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         TextView success = (TextView) view.findViewById(R.id.success);
         success.setTypeface(iconFont);
@@ -265,5 +292,4 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
-
 }
