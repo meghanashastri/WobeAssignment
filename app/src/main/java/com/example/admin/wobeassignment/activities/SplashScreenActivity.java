@@ -42,7 +42,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         splashTread.start();
     }
 
-
+    /*
+      Method to go to next activity.
+      If customer has Registered/Logged in, Dashboard activity is shown
+      else, Onboarding activity is shown.
+     */
     protected void goToNextActivity() {
         boolean isFirstTime = SharedPreferenceManager.getInstance(this).isFirstTimeLaunch();
         Intent intent = new Intent();
