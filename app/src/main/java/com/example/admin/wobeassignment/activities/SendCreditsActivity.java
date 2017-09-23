@@ -180,6 +180,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
 
         if (availableCredits == 0) {
             if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
+                btnSendCredits.setEnabled(false);
                 sendCreditsApiCall(etCredits.getText().toString().trim(), etDescription.getText().toString());
             } else {
                 Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
@@ -187,6 +188,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
             }
         } else if (availableCredits == 1) {
             if (CommonUtils.isConnectingToInternet(SendCreditsActivity.this)) {
+                btnSendCredits.setEnabled(false);
                 sendCreditsApiCall(etCredits.getText().toString().trim(), etDescription.getText().toString());
             } else {
                 Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
@@ -225,6 +227,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().getString(R.string.error_message),
                                         Toast.LENGTH_SHORT).show();
+                                btnSendCredits.setEnabled(true);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -233,6 +236,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                btnSendCredits.setEnabled(true);
             }
         });
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
