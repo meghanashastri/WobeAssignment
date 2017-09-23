@@ -19,7 +19,7 @@ public class SharedPreferenceManager {
 
     private static synchronized void initPreference(Context context) {
         if (mPreference == null) {
-            mPreference = context.getSharedPreferences("paytm-preferences", Context.MODE_PRIVATE);
+            mPreference = context.getSharedPreferences("wobe-preferences", Context.MODE_PRIVATE);
             editor = mPreference.edit();
         }
     }

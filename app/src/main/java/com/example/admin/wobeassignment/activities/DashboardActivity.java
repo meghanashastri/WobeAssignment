@@ -100,8 +100,9 @@ public class DashboardActivity extends AppCompatActivity
 
 
     /*
-    Method to make API call to get Dashboard details
-    Request parametrs for the API call is : customerID
+       Method to make API call to get Dashboard details
+       Request parametrs for the API call is : customerID
+       Successful response - list of transactions and credits
      */
     private void makeApiCall(String customerID) {
         String url = String.format(Constants.DASHBOARD_URL, customerID);
