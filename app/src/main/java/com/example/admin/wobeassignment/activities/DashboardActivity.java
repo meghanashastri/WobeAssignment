@@ -1,6 +1,5 @@
 package com.example.admin.wobeassignment.activities;
 
-import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +17,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
@@ -69,6 +67,7 @@ public class DashboardActivity extends AppCompatActivity
         initialiseNavigationDrawer();
     }
 
+    //method to initialise the navigation drawer(hamburger menu)
     private void initialiseNavigationDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -83,12 +82,14 @@ public class DashboardActivity extends AppCompatActivity
         setEmailAndNameInNavHeader(navigationView, drawer);
     }
 
+    //method to set details in the navigation drawer(hamburger menu)
     private void setEmailAndNameInNavHeader(NavigationView nameInNavHeader, final DrawerLayout drawer) {
         View header = nameInNavHeader.getHeaderView(0);
 
         TextView tvUsername = (TextView) header.findViewById(R.id.tvUsername);
         TextView tvEmail = (TextView) header.findViewById(R.id.tvEmail);
 
+        //Retrieving name and email from Shared Preference to show in menu
         if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null) {
             tvUsername.setText(SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME));
         }
@@ -98,6 +99,10 @@ public class DashboardActivity extends AppCompatActivity
     }
 
 
+    /*
+    Method to make API call to get Dashboard details
+    Request parametrs for the API call is : customerID
+     */
     private void makeApiCall(String customerID) {
         String url = String.format(Constants.DASHBOARD_URL, customerID);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
@@ -106,10 +111,15 @@ public class DashboardActivity extends AppCompatActivity
                     public void onResponse(JSONObject response) {
                         try {
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                //Parse JSON response to a model class - DashboardModel
                                 DashboardModel model = new Gson().fromJson
                                         (response.toString(), DashboardModel.class);
                                 TextView tvName = (TextView) findViewById(R.id.tvName);
 
+                               /*
+                               Save name, email and credits received from JSON response and store
+                                 in Shared Preference and shown in Dashboard
+                                 */
                                 if (model.getFirstName() != null) {
                                     tvName.setText(model.getFirstName().trim());
                                     SharedPreferenceManager.getInstance(DashboardActivity.this).
@@ -119,6 +129,7 @@ public class DashboardActivity extends AppCompatActivity
                                     SharedPreferenceManager.getInstance(DashboardActivity.this).
                                             saveData(Constants.LAST_NAME, model.getLastName());
                                 }
+
                                 TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
                                 if (model.getCredits() != null) {
                                     tvBalance.setText(getResources().getString(R.string.balance) + model.getCredits());
@@ -126,13 +137,21 @@ public class DashboardActivity extends AppCompatActivity
                                             saveData(Constants.CREDITS, model.getCredits());
                                 }
 
+
                                 if (model.getTransaction().size() > 0) {
+                                    /*
+                                        Method call to get added, sent and received values, to show on dashboard
+                                    */
                                     List<Integer> list = getSentAndRececivedList(model.getTransaction());
                                     if (list.size() > 0) {
                                         tvAdded.setText(String.valueOf(list.get(0)));
                                         tvSent.setText(String.valueOf(list.get(1)));
                                         tvReceived.setText(String.valueOf(list.get(2)));
                                     }
+                                    /*
+                                       List of transactions received in JSON response.
+                                       The list is sent to the recycler view adapter where data is shown on the Dashboard
+                                    */
                                     adapter.setDataInAdapter(model.getTransaction());
                                     recyclerView.setAdapter(adapter);
                                 } else {
@@ -152,6 +171,23 @@ public class DashboardActivity extends AppCompatActivity
         ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
     }
 
+
+    /*
+      Method to get the sent, received and added credits of the customer from the transaction list.
+
+      If the fromCustomerId received from the JSON response = customerId saved in Shared Preference,
+      then the credits is a sent value
+
+      If the toCustomerId received from the JSON response = customerId saved in Shared Preference,
+      then the credits is a received value
+
+            The received value can be either from WOBE(10000 credits on regitration) or any other customer
+            So, if the fromCustomerId = 999999999(WOBE customerId), then the credits is an added value
+            else it is a received value
+
+       A list containing the added, sent and received value is returned
+
+    */
     private List<Integer> getSentAndRececivedList(List<TransactionModel> transaction) {
 
         int sent = 0, received = 0, added = 0;
@@ -179,6 +215,9 @@ public class DashboardActivity extends AppCompatActivity
     }
 
 
+    /*
+       Method to initialise all the views, set the toolbar and set Typeface to show icons.
+     */
     private void initialiseViews() {
         Typeface iconFont = FontManager.getTypeface(getApplicationContext(), FontManager.FONTAWESOME);
         TextView iconAdded = (TextView) findViewById(R.id.iconAdded);
@@ -203,6 +242,9 @@ public class DashboardActivity extends AppCompatActivity
         tvReceived = (TextView) findViewById(R.id.tvReceived);
     }
 
+    /*
+      Method to handle back press
+    */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -214,6 +256,9 @@ public class DashboardActivity extends AppCompatActivity
     }
 
 
+    /*
+      Method to handle click events for items in the navigation drawer
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -232,6 +277,9 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
+    /*
+      Method to show the logout pop-up
+    */
     private void showLogoutPopUp() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -261,6 +309,9 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
+    /*
+       Method to handle click listeners of views
+    */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -271,12 +322,19 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
+    /*
+      Method to go to the next activity
+    */
     protected void goToNextActivity(Class nextActivity) {
         Intent intent = new Intent();
         intent.setClass(this, nextActivity);
         startActivity(intent);
     }
 
+
+    /*
+       Dashboard API call done
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -287,6 +345,10 @@ public class DashboardActivity extends AppCompatActivity
         }
     }
 
+    /*
+       When activity is the foreground, brought back from background, Passcode screen is shown again.
+       This can be achieved through this lifecycle method of the activity
+    */
     @Override
     protected void onStart() {
         super.onStart();
