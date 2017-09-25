@@ -74,5 +74,6 @@
     <string name="enter_valid_email">Enter valid email address</string>
     <string name="min_first_name">Firstname should be at least 4 characters</string>
     <string name="min_password">Password should be at least 6 characters</string>
+    <string name="force_crash">Force Crash</string>
 
 </resources>

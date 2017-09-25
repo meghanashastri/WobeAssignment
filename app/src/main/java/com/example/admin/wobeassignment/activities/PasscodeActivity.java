@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.admin.wobeassignment.R;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Admin on 22-09-2017.
@@ -31,9 +36,24 @@ public class PasscodeActivity extends AppCompatActivity {
         passcodeBundle = bundle.getString(Constants.KEY_PASSCODE_ACTIVITY_BUNDLE);
 
         setContentView(R.layout.activity_passcode);
+        Fabric.with(this, new Crashlytics());
         initialiseViews();
         setPasscodeTitle();
+
+        //code to force crash the app
+        Button btnCrash = (Button) findViewById(R.id.btnCrash);
+        btnCrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                forceCrash(view);
+            }
+        });
     }
+
+    public void forceCrash(View view) {
+        throw new RuntimeException("This is a crash");
+    }
+
 
     /*
       Method to set title of Passcode Activity
