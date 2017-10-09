@@ -118,6 +118,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                             if (facebookId != null && !facebookId.isEmpty() && name != null
                                                     && !name.isEmpty() && email != null && !email.isEmpty()) {
 
+                                                String qrCode = CommonUtils.generateQRCode(email);
+                                                SharedPreferenceManager.getInstance(LoginActivity.this).
+                                                        saveData(Constants.QR_CODE, qrCode);
                                                 /*
                                                    API call for Social Login
                                                 */
@@ -260,6 +263,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             String email = etEmail.getText().toString().trim();
             if (isValidEmail(email)) {
                 String password = etPassword.getText().toString().trim();
+                String qrCode = CommonUtils.generateQRCode(email);
+                SharedPreferenceManager.getInstance(LoginActivity.this).
+                        saveData(Constants.QR_CODE, qrCode);
                 if (CommonUtils.isConnectingToInternet(LoginActivity.this)) {
                     //login api call
                     makeApiCallForLogin(email, password);

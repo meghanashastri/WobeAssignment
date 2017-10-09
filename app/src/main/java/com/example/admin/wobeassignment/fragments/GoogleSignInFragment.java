@@ -157,6 +157,8 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             String googleId = acct.getId();
             SharedPreferenceManager.getInstance(context).saveData(Constants.USERNAME, userName);
             SharedPreferenceManager.getInstance(context).saveData(Constants.EMAIL, email);
+            String qrCode = CommonUtils.generateQRCode(email);
+            SharedPreferenceManager.getInstance(context).saveData(Constants.QR_CODE, qrCode);
             if (CommonUtils.isConnectingToInternet(getActivity())) {
                 //make Social Login API call
                 makeApiCall(firstName, lastName, email, "123445555");

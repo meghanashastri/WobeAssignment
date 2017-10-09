@@ -27,26 +27,26 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@drawable/transperant_background_image">
 
-        <com.example.admin.wobeassignment.customViews.CircularImageView
-            android:id="@+id/ivProfilePicture"
-            android:layout_width="@dimen/hundred_100dp"
-            android:layout_height="@dimen/hundred_100dp"
+        <ImageView
+            android:id="@+id/ivQRCode"
+            android:layout_width="@dimen/two_hundred_200dp"
+            android:layout_height="@dimen/two_hundred_200dp"
             android:layout_centerHorizontal="true"
             android:layout_marginEnd="@dimen/ten_10dp"
             android:layout_marginLeft="@dimen/ten_10dp"
             android:layout_marginRight="@dimen/ten_10dp"
             android:layout_marginStart="@dimen/ten_10dp"
             android:layout_marginTop="@dimen/fifty_50dp"
-            android:background="@drawable/profile"
             android:paddingLeft="@dimen/ten_10dp"
             android:paddingRight="@dimen/ten_10dp"
-            android:paddingTop="@dimen/ten_10dp"
-            android:scaleType="centerCrop" />
+            android:paddingTop="@dimen/ten_10dp" />
 
         <LinearLayout
+            android:layout_below="@id/ivQRCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/ten_10dp"
             android:layout_margin="@dimen/ten_10dp"
             android:orientation="vertical">
 

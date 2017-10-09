@@ -1,9 +1,12 @@
 package com.example.admin.wobeassignment.activities;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
 
 public class ProfileActivity extends AppCompatActivity {
     private TextView tvName, tvEmail;
+    private ImageView ivQRCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void initialiseViews() {
         tvName = (TextView) findViewById(R.id.tvName);
         tvEmail = (TextView) findViewById(R.id.tvEmail);
+        ivQRCode = (ImageView) findViewById(R.id.ivQRCode);
     }
 
     /*
@@ -59,6 +64,12 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL) != null) {
             tvEmail.setText(SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL));
+        }
+
+        if (SharedPreferenceManager.getInstance(this).getString(Constants.QR_CODE) !=null){
+            String qrCode = SharedPreferenceManager.getInstance(this).getString(Constants.QR_CODE);
+            byte[] imageAsBytes = Base64.decode(qrCode, Base64.DEFAULT);
+            ivQRCode.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
         }
     }
 

@@ -13,6 +13,7 @@ public class Constants {
     public static final String CUSTOMER_ID = "customerId";
     public static final String CREDITS = "credits";
     public static final String PASSCODE = "passcode";
+    public static final String QR_CODE = "qrCode";
 
 
     public static final String KEY_PASSCODE_ACTIVITY_BUNDLE = "PasscodeActivity";

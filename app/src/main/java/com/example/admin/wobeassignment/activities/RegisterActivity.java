@@ -122,6 +122,10 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                                     saveData(Constants.EMAIL, email);
                                             if (facebookId != null && !facebookId.isEmpty() && name != null
                                                     && !name.isEmpty() && email != null && !email.isEmpty()) {
+
+                                                String qrCode = CommonUtils.generateQRCode(email);
+                                                SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                                        saveData(Constants.QR_CODE, qrCode);
                                                  /*
                                                    API call for Social Login
                                                 */
@@ -263,6 +267,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                 if (isValidEmail(email)) {
                     if (password.length() >= 6) {
                         if (CommonUtils.isConnectingToInternet(RegisterActivity.this)) {
+
+                            String qrCode = CommonUtils.generateQRCode(email);
+                            SharedPreferenceManager.getInstance(RegisterActivity.this).
+                                    saveData(Constants.QR_CODE, qrCode);
+
                             //register api call
                             makeApiCall(firstName, lastName, email, password, tokenId);
                         } else {
@@ -329,7 +338,8 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
      Request parameters - firstname, lastname, email, password and tokenid.
      Successful Response - customerid
    */
-    private void makeApiCall(final String firstName, final String lastName, final String email, String password, String tokenId) {
+    private void makeApiCall(final String firstName, final String lastName, final String email, String password,
+                             String tokenId) {
         String url = String.format(Constants.Register_URL, firstName, lastName, email, password, tokenId);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
                 new Response.Listener<JSONObject>() {
