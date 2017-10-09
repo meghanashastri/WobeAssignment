@@ -7,11 +7,14 @@ import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Created by Admin on 21-09-2017.
@@ -23,6 +26,7 @@ public class ApplicationLoader extends Application implements
     public static final String TAG = ApplicationLoader.class.getSimpleName();
     private static ApplicationLoader mInstance;
     private static RequestQueue mRequestQueue;
+    private static FirebaseAnalytics mFirebaseAnalytics;
     public static String stateOfLifeCycle = "";
 
     public static boolean wasInBackground = false;
@@ -31,12 +35,17 @@ public class ApplicationLoader extends Application implements
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mInstance = this;
         registerActivityLifecycleCallbacks(this);
     }
 
     public static synchronized ApplicationLoader getInstance() {
         return mInstance;
+    }
+
+    public static FirebaseAnalytics getFirebaseInstance() {
+        return mFirebaseAnalytics;
     }
 
     public static RequestQueue getRequestQueue() {
