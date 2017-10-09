@@ -39,9 +39,10 @@ public class PasscodeActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         initialiseViews();
         setPasscodeTitle();
+    }
 
         //code to force crash the app
-        Button btnCrash = (Button) findViewById(R.id.btnCrash);
+       /* Button btnCrash = (Button) findViewById(R.id.btnCrash);
         btnCrash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +53,7 @@ public class PasscodeActivity extends AppCompatActivity {
 
     public void forceCrash(View view) {
         throw new RuntimeException("This is a crash");
-    }
+    }*/
 
 
     /*
