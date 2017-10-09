@@ -35,6 +35,7 @@ import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -81,6 +82,7 @@ public class DashboardActivity extends AppCompatActivity
 
         setEmailAndNameInNavHeader(navigationView, drawer);
     }
+
 
     //method to set details in the navigation drawer(hamburger menu)
     private void setEmailAndNameInNavHeader(NavigationView nameInNavHeader, final DrawerLayout drawer) {

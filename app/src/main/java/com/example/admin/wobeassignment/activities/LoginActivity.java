@@ -33,6 +33,7 @@ import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -195,6 +196,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                         saveData(Constants.FIRST_NAME, firstName);
                                 SharedPreferenceManager.getInstance(LoginActivity.this).
                                         saveData(Constants.LAST_NAME, lastName);
+                                CommonUtils.firebaseAnalytics("Login", "Facebook");
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {
@@ -321,6 +323,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(getApplicationContext()).
                                         saveData(Constants.CUSTOMER_ID, customerId);
+                                CommonUtils.firebaseAnalytics("Login", "Email");
                                 goToNextActivity(PasscodeActivity.class);
                             } else {
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalid_credentials),

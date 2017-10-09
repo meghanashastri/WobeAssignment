@@ -7,9 +7,7 @@ import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.crashlytics.android.Crashlytics;
-
 import io.fabric.sdk.android.Fabric;
 
 import com.android.volley.RequestQueue;
@@ -47,7 +45,6 @@ public class ApplicationLoader extends Application implements
     public static FirebaseAnalytics getFirebaseInstance() {
         return mFirebaseAnalytics;
     }
-
     public static RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(ApplicationLoader.getInstance());

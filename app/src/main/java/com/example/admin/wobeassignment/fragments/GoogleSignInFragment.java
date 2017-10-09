@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -192,6 +193,11 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
                                         firstName);
                                 SharedPreferenceManager.getInstance(context).saveData(Constants.LAST_NAME,
                                         lastName);
+                                if (response.getString("statusMessage").equalsIgnoreCase("User Added")) {
+                                    CommonUtils.firebaseAnalytics("Register", "Google");
+                                } else if (response.getString("statusMessage").equalsIgnoreCase("Existing User")) {
+                                    CommonUtils.firebaseAnalytics("Login", "Google");
+                                }
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {

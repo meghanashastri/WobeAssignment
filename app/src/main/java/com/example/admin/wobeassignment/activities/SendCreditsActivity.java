@@ -29,6 +29,7 @@ import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -158,6 +159,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
                                 toFirstName = model.getFIRST_NAME();
                                 toLastName = model.getLAST_NAME();
+                                CommonUtils.firebaseAnalytics("Verified", "User Verified");
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().
                                                 getString(R.string.invalid_user),
@@ -229,7 +231,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
 
        Successful response - Success Message
     */
-    private void sendCreditsApiCall(String credits, String description) {
+    private void sendCreditsApiCall(final String credits, String description) {
         if (SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME) != null &&
                 SharedPreferenceManager.getInstance(this).getString(Constants.LAST_NAME) != null) {
             fromFirstName = SharedPreferenceManager.getInstance(this).getString(Constants.FIRST_NAME);
@@ -249,6 +251,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
+                                CommonUtils.firebaseAnalytics("Send Credits", credits);
                                 showSuccessDialog();
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().getString(R.string.error_message),
