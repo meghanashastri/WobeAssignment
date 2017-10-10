@@ -112,6 +112,7 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
             //if qrcode has nothing in it
             if (result.getContents() == null) {
                 Toast.makeText(this, getResources().getString(R.string.result_not_found), Toast.LENGTH_LONG).show();
+                tvVerify.setVisibility(View.VISIBLE);
             } else {
                 //if qr contains data
                 try {
