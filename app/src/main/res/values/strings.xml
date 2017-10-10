@@ -46,6 +46,7 @@
     <string name="facebook_icon">&#xf082;</string>
     <string name="google_icon">&#xf0d4;</string>
     <string name="send_credits">Send Credits</string>
+    <string name="scan_and_pay">Scan And Pay</string>
     <string name="recent_transactions">Transactions</string>
     <string name="to_email">To Email</string>
     <string name="description">Description</string>

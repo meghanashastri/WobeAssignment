@@ -198,28 +198,11 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSendCredits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/creditDetailsLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/forty_five_45dp"
-        android:background="@drawable/button_primary_selector"
-        android:paddingEnd="@dimen/thirty_30dp"
-        android:paddingLeft="@dimen/thirty_30dp"
-        android:paddingRight="@dimen/thirty_30dp"
-        android:paddingStart="@dimen/thirty_30dp"
-        android:text="@string/send_credits"
-        android:textAllCaps="true"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_20sp" />
-
     <TextView
         android:id="@+id/tvRecentTransactions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnSendCredits"
+        android:layout_below="@+id/sendLayout"
         android:layout_marginTop="@dimen/thirty_30dp"
         android:padding="@dimen/ten_10dp"
         android:text="@string/recent_transactions"
@@ -233,5 +216,41 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvRecentTransactions"
         android:layout_margin="@dimen/ten_10dp" />
+
+    <LinearLayout
+        android:id="@+id/sendLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/creditDetailsLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnSendCredits"
+            android:layout_width="@dimen/zero_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_primary_selector"
+            android:text="@string/send_credits"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <Button
+            android:id="@+id/btnScanAndPay"
+            android:layout_width="@dimen/zero_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/five_5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_primary_selector"
+            android:text="@string/scan_and_pay"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_20sp" />
+    </LinearLayout>
+
 
 </RelativeLayout>
