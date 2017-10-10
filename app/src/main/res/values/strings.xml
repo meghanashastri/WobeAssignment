@@ -55,6 +55,7 @@
     <string name="verify">Verify</string>
     <string name="invalid_user">Invalid Recipient</string>
     <string name="send">Send</string>
+    <string name="pay">Pay</string>
     <string name="enter_cedits">Enter Credits</string>
     <string name="enter_description">Enter Description</string>
     <string name="insufficient_credits">Insufficient Credit Balance</string>
