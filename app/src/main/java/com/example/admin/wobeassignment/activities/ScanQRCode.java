@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +46,7 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
 
     private EditText etEmail, etCredits, etDescription;
     private String toCustomerId, fromCustomerId, toFirstName, toLastName, fromFirstName, fromLastName;
-    private Button btnPay;
+    private Button btnPay, tvVerify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
     */
     private void initialiseScan() {
         IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setPrompt("Scan barcode");
+        integrator.setPrompt(getResources().getString(R.string.scan_qr_code));
         integrator.setOrientationLocked(false);
         integrator.initiateScan();
     }
@@ -85,6 +84,8 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
         etDescription = (EditText) findViewById(R.id.etDescription);
         btnPay = (Button) findViewById(R.id.btnPay);
         btnPay.setOnClickListener(this);
+        tvVerify = (Button) findViewById(R.id.tvVerify);
+        tvVerify.setOnClickListener(this);
     }
 
     /*
@@ -107,7 +108,7 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
         if (result != null) {
             //if qrcode has nothing in it
             if (result.getContents() == null) {
-                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getResources().getString(R.string.result_not_found), Toast.LENGTH_LONG).show();
             } else {
                 //if qr contains data
                 try {
@@ -115,18 +116,25 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
                     JSONObject obj = new JSONObject(result.getContents());
                     //setting values to view
                     etEmail.setText(obj.getString(Constants.EMAIL));
-                    verifyUserApiCall(obj.getString(Constants.EMAIL));
-
-
+                    if (CommonUtils.isConnectingToInternet(ScanQRCode.this)) {
+                        verifyUserApiCall(result.getContents());
+                    } else {
+                        Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     //if control comes here
                     //that means the encoded format not matches
                     //in this case you can display whatever data is available on the qrcode
                     //to a toast
-                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                     etEmail.setText(result.getContents());
-                    verifyUserApiCall(result.getContents());
+                    if (CommonUtils.isConnectingToInternet(ScanQRCode.this)) {
+                        verifyUserApiCall(result.getContents());
+                    } else {
+                        Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         } else {
@@ -141,9 +149,21 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
             case R.id.btnPay:
                 sendCreditsValidation();
                 break;
+            case R.id.tvVerify:
+                String email = etEmail.getText().toString().trim();
+                if (email != null && !email.isEmpty()) {
+                    if (CommonUtils.isConnectingToInternet(ScanQRCode.this)) {
+                        verifyUserApiCall(email);
+                    } else {
+                        Toast.makeText(this, getResources().getString(R.string.check_internet_connection),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.enter_email_to_verify), Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
-
 
     /*
     Method for User validation API call.
@@ -151,41 +171,47 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
     Successful response - toCustomerId, toFirstName, toLastname
   */
     private void verifyUserApiCall(final String email) {
-        String url = String.format(Constants.VERIFY_USER_URL, email);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
-                                VerifyUserModel model = new Gson().fromJson
-                                        (response.toString(), VerifyUserModel.class);
-                                toCustomerId = model.getCUSTOMER_ID().toString();
-                                etEmail.setEnabled(false);
-                                etCredits.setEnabled(true);
-                                etCredits.setHintTextColor(getResources().getColor(R.color.colorPrimary));
-                                etDescription.setEnabled(true);
-                                etDescription.setHintTextColor(getResources().getColor(R.color.colorPrimary));
-                                btnPay.setEnabled(true);
-                                etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
-                                toFirstName = model.getFIRST_NAME();
-                                toLastName = model.getLAST_NAME();
-                                CommonUtils.firebaseAnalytics("Verified", "User Verified");
-                            } else {
-                                Toast.makeText(ScanQRCode.this, getResources().
-                                                getString(R.string.invalid_user),
-                                        Toast.LENGTH_SHORT).show();
+        if (email.equalsIgnoreCase(SharedPreferenceManager.getInstance(this).getString(Constants.EMAIL))) {
+            Toast.makeText(this, getString(R.string.cannot_send_credits), Toast.LENGTH_SHORT).show();
+        } else {
+            String url = String.format(Constants.VERIFY_USER_URL, email);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
+                                    VerifyUserModel model = new Gson().fromJson
+                                            (response.toString(), VerifyUserModel.class);
+                                    toCustomerId = model.getCUSTOMER_ID().toString();
+                                    tvVerify.setVisibility(View.GONE);
+                                    etEmail.setEnabled(false);
+                                    etCredits.setEnabled(true);
+                                    etCredits.setHintTextColor(getResources().getColor(R.color.colorPrimary));
+                                    etDescription.setEnabled(true);
+                                    etDescription.setHintTextColor(getResources().getColor(R.color.colorPrimary));
+                                    btnPay.setEnabled(true);
+                                    etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
+                                    toFirstName = model.getFIRST_NAME();
+                                    toLastName = model.getLAST_NAME();
+                                    CommonUtils.firebaseAnalytics("Verified", "User Verified");
+                                } else {
+                                    Toast.makeText(ScanQRCode.this, getResources().
+                                                    getString(R.string.invalid_user),
+                                            Toast.LENGTH_SHORT).show();
+                                    tvVerify.setVisibility(View.VISIBLE);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            ApplicationLoader.getRequestQueue().add(jsonObjectRequest);
+        }
     }
 
 

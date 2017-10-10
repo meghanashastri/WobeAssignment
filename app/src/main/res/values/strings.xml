@@ -78,5 +78,6 @@
     <string name="min_first_name">Firstname should be at least 4 characters</string>
     <string name="min_password">Password should be at least 6 characters</string>
     <string name="force_crash">Force Crash</string>
+    <string name="result_not_found">Result Not Found</string>
 
 </resources>

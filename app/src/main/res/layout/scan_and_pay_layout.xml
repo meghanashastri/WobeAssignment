@@ -10,14 +10,35 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etEmail"
-            style="@style/edit_text_primary"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:inputType="textEmailAddress"
-            android:maxLength="45" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/edit_text_primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/to_email"
+                android:inputType="textEmailAddress"
+                android:maxLength="45" />
+
+            <Button
+                android:id="@+id/tvVerify"
+                android:layout_width="@dimen/margin_65dp"
+                android:layout_height="@dimen/twenty_20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_red"
+                android:text="@string/verify"
+                android:visibility="gone"
+                android:textColor="@color/google_red"
+                android:textSize="@dimen/text_size_14sp" />
+
+        </RelativeLayout>
+
 
         <EditText
             android:id="@+id/etCredits"
