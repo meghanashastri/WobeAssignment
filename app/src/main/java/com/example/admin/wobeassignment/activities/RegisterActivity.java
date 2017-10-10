@@ -51,6 +51,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
     private CallbackManager callbackManager;
     private Button fb, btnRegister;
     private EditText etFirstName, etLastName, etEmail, etPassword;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
 
         setContentView(R.layout.activity_register);
+        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
 
          /*
            Facebook Login integration.
@@ -203,7 +205,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                         saveData(Constants.FIRST_NAME, firstName);
                                 SharedPreferenceManager.getInstance(RegisterActivity.this).
                                         saveData(Constants.LAST_NAME, lastName);
-                                CommonUtils.firebaseAnalytics("Register", "Facebook");
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Type", "Facebook");
+                                firebaseAnalytics.logEvent("Register", bundle);
+
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {
@@ -358,7 +364,11 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
                                         saveData(Constants.EMAIL, email);
                                 SharedPreferenceManager.getInstance(getApplicationContext()).
                                         saveData(Constants.CUSTOMER_ID, customerId);
-                                CommonUtils.firebaseAnalytics("Register", "Email");
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Type", "Email");
+                                firebaseAnalytics.logEvent("Register", bundle);
+
                                 goToNextActivity(PasscodeActivity.class);
                             } else {
                                 Toast.makeText(RegisterActivity.this, getResources().getString(R.string.existing_user),

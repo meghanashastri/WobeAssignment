@@ -46,11 +46,13 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     private Button btnSendCredits, tvVerify;
     private String toCustomerId, fromCustomerId, toFirstName, toLastName, fromFirstName, fromLastName;
     private TextView tvName, tvBalance;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_credits);
+        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
         initialiseToolbar();
         initialiseViews();
         fromCustomerId = SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID);
@@ -159,12 +161,20 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                                 etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
                                 toFirstName = model.getFIRST_NAME();
                                 toLastName = model.getLAST_NAME();
-                                CommonUtils.firebaseAnalytics("Verified", "User Verified");
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Result", "Yes");
+                                firebaseAnalytics.logEvent("SendCreditsUserVerification", bundle);
+
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().
                                                 getString(R.string.invalid_user),
                                         Toast.LENGTH_SHORT).show();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Result", "No");
+                                firebaseAnalytics.logEvent("SendCreditsUserVerification", bundle);
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -251,7 +261,12 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
-                                CommonUtils.firebaseAnalytics("Send Credits", credits);
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Type", "Manual");
+                                bundle.putString(FirebaseAnalytics.Param.VALUE, credits);
+                                firebaseAnalytics.logEvent("SendCredits", bundle);
+
                                 showSuccessDialog();
                             } else {
                                 Toast.makeText(SendCreditsActivity.this, getResources().getString(R.string.error_message),

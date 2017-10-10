@@ -29,6 +29,7 @@ import com.example.admin.wobeassignment.utilities.CommonUtils;
 import com.example.admin.wobeassignment.utilities.Constants;
 import com.example.admin.wobeassignment.utilities.FontManager;
 import com.example.admin.wobeassignment.utilities.SharedPreferenceManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -47,11 +48,13 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
     private EditText etEmail, etCredits, etDescription;
     private String toCustomerId, fromCustomerId, toFirstName, toLastName, fromFirstName, fromLastName;
     private Button btnPay, tvVerify;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qr_code);
+        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
         initialiseToolbar();
         initialiseScan();
         initialiseViews();
@@ -194,11 +197,17 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
                                     etEmail.setTextColor(getResources().getColor(R.color.edit_text_disable_color));
                                     toFirstName = model.getFIRST_NAME();
                                     toLastName = model.getLAST_NAME();
-                                    CommonUtils.firebaseAnalytics("Verified", "User Verified");
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("Result", "Yes");
+                                    firebaseAnalytics.logEvent("SendCreditsUserVerification", bundle);
                                 } else {
                                     Toast.makeText(ScanQRCode.this, getResources().
                                                     getString(R.string.invalid_user),
                                             Toast.LENGTH_SHORT).show();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("Result", "No");
+                                    firebaseAnalytics.logEvent("SendCreditsUserVerification", bundle);
                                     tvVerify.setVisibility(View.VISIBLE);
                                 }
                             } catch (JSONException e) {
@@ -289,7 +298,12 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
                             if (response != null && response.getString("returnStatus").equalsIgnoreCase("SUCCESS")) {
                                 BaseModel model = new Gson().fromJson
                                         (response.toString(), BaseModel.class);
-                                CommonUtils.firebaseAnalytics("Send Credits", credits);
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Type", "QRCode");
+                                bundle.putString(FirebaseAnalytics.Param.VALUE, credits);
+                                firebaseAnalytics.logEvent("SendCredits", bundle);
+
                                 showSuccessDialog();
                             } else {
                                 Toast.makeText(ScanQRCode.this, getResources().getString(R.string.error_message),

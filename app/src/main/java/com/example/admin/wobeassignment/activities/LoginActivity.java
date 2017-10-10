@@ -48,6 +48,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private EditText etEmail, etPassword;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
 
         /*
            Facebook Login integration.
@@ -199,7 +201,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                         saveData(Constants.FIRST_NAME, firstName);
                                 SharedPreferenceManager.getInstance(LoginActivity.this).
                                         saveData(Constants.LAST_NAME, lastName);
-                                CommonUtils.firebaseAnalytics("Login", "Facebook");
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Type", "Facebook");
+                                firebaseAnalytics.logEvent("Login", bundle);
+
                                 goToNextActivity(PasscodeActivity.class);
                             }
                         } catch (JSONException e) {
@@ -329,7 +335,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                 String customerId = model.getCustomerID().toString();
                                 SharedPreferenceManager.getInstance(getApplicationContext()).
                                         saveData(Constants.CUSTOMER_ID, customerId);
-                                CommonUtils.firebaseAnalytics("Login", "Email");
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("Type", "Email");
+                                firebaseAnalytics.logEvent("Login", bundle);
+
                                 goToNextActivity(PasscodeActivity.class);
                             } else {
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalid_credentials),

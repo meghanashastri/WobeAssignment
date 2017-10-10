@@ -32,10 +32,10 @@ public class CommonUtils {
         return netInfo != null && netInfo.isConnected();
     }
 
-    public static void firebaseAnalytics(String event, String action) {
+    public static void firebaseAnalytics(String param, String action, String event) {
         FirebaseAnalytics firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
         Bundle bundle = new Bundle();
-        bundle.putString(event, action);
+        bundle.putString(param, action);
         firebaseAnalytics.logEvent(event, bundle);
     }
 

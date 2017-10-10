@@ -45,6 +45,7 @@ public class ApplicationLoader extends Application implements
     public static FirebaseAnalytics getFirebaseInstance() {
         return mFirebaseAnalytics;
     }
+
     public static RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(ApplicationLoader.getInstance());

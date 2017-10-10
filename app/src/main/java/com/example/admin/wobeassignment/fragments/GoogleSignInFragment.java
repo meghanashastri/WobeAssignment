@@ -45,6 +45,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
     private static final int RC_SIGN_IN = 9001;
     private static String TAG = GoogleSignInFragment.class.toString();
     private Context context;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
-
+        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
         if (CommonUtils.isConnectingToInternet(getActivity())) {
             googleSignIn();
         } else {
@@ -196,9 +197,13 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
                                 SharedPreferenceManager.getInstance(context).saveData(Constants.LAST_NAME,
                                         lastName);
                                 if (response.getString("statusMessage").equalsIgnoreCase("User Added")) {
-                                    CommonUtils.firebaseAnalytics("Register", "Google");
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("Type", "Google");
+                                    firebaseAnalytics.logEvent("Register", bundle);
                                 } else if (response.getString("statusMessage").equalsIgnoreCase("Existing User")) {
-                                    CommonUtils.firebaseAnalytics("Login", "Google");
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("Type", "Google");
+                                    firebaseAnalytics.logEvent("Login", bundle);
                                 }
                                 goToNextActivity(PasscodeActivity.class);
                             }
