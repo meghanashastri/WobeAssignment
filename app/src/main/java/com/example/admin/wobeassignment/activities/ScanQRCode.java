@@ -19,16 +19,13 @@ import org.json.JSONObject;
  */
 
 public class ScanQRCode extends AppCompatActivity {
-    //qr code scanner object
-    private IntentIntegrator qrScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qr_code);
-        qrScan = new IntentIntegrator(this);
-        qrScan.initiateScan();
         initialiseToolbar();
+        initialiseScan();
     }
 
     /*
@@ -39,6 +36,16 @@ public class ScanQRCode extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getText(R.string.scan_qr_code));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    /*
+      Method to initialise the barcode scanner
+    */
+    private void initialiseScan() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan barcode");
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
     }
 
     /*
