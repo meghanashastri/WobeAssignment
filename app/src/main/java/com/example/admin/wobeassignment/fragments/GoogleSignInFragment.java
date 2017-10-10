@@ -66,7 +66,7 @@ public class GoogleSignInFragment extends android.support.v4.app.Fragment implem
             getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
-        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(context);
         if (CommonUtils.isConnectingToInternet(getActivity())) {
             googleSignIn();
         } else {

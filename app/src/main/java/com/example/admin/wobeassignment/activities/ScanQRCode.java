@@ -54,7 +54,7 @@ public class ScanQRCode extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qr_code);
-        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         initialiseToolbar();
         initialiseScan();
         initialiseViews();

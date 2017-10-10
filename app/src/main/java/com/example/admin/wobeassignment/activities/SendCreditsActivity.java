@@ -52,7 +52,7 @@ public class SendCreditsActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_credits);
-        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         initialiseToolbar();
         initialiseViews();
         fromCustomerId = SharedPreferenceManager.getInstance(this).getString(Constants.CUSTOMER_ID);

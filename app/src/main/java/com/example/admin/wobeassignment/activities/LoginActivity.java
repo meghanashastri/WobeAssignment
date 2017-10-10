@@ -56,7 +56,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         /*
            Facebook Login integration.

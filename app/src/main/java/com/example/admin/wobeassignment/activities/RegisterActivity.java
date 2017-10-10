@@ -60,7 +60,7 @@ public class RegisterActivity extends FragmentActivity implements View.OnClickLi
 
 
         setContentView(R.layout.activity_register);
-        firebaseAnalytics = ApplicationLoader.getFirebaseInstance();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
          /*
            Facebook Login integration.
