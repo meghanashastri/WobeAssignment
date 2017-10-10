@@ -72,12 +72,15 @@
         <activity
             android:name=".activities.ProfileActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ScanQRCode"
+            android:screenOrientation="portrait" />
 
 
-       <meta-data
+        <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ed0340f0c1199f08efceba7d2cd55568af2f9e78" />
-         <meta-data
+        <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ed0340f0c1199f08efceba7d2cd55568af2f9e78" />
 

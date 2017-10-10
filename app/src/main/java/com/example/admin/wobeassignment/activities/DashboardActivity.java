@@ -233,6 +233,8 @@ public class DashboardActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         Button btnSendCredits = (Button) findViewById(R.id.btnSendCredits);
         btnSendCredits.setOnClickListener(this);
+        Button btnScanAndPay = (Button) findViewById(R.id.btnScanAndPay);
+        btnScanAndPay.setOnClickListener(this);
         recyclerView = (RecyclerView)
                 findViewById(R.id.rvRecentTransactions);
         adapter = new TransactionAdapter(this);
@@ -322,6 +324,10 @@ public class DashboardActivity extends AppCompatActivity
             case R.id.btnSendCredits:
                 goToNextActivity(SendCreditsActivity.class);
                 break;
+            case R.id.btnScanAndPay:
+                goToNextActivity(ScanQRCode.class);
+                break;
+
         }
     }
 
