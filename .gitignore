@@ -36,3 +36,8 @@ library/
 magpie.iml
 manifest-merger-release-report.txt
 */build/
+
+/app/src/main/res/values/api_key.xml
+
+google-services.json
+fabric.properties
